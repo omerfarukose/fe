@@ -19,9 +19,9 @@ export default function Project(){
     }, []);
 
     const Menus = [
-        { title: "Profil", icon: <FaRegUser color={"gray"}/>},
-        { title: "Projelerim", icon: <FaHandMiddleFinger color={"gray"}/>},
-        { title: "Yapılacaklar", icon: <FaTasks color={"gray"}/>},
+        { title: "Profil", icon: <FaRegUser color={"white"}/>},
+        { title: "Projelerim", icon: <FaHandMiddleFinger color={"white"}/>},
+        { title: "Yapılacaklar", icon: <FaTasks color={"white"}/>},
     ];
 
     const [selectedMenuIndex, setSelectedMenuIndex] = useState(0);
@@ -42,14 +42,14 @@ export default function Project(){
             <div className={`flex flex-col w-full`}>
 
                 {/* user avatar & name-uni */}
-                <div className={`bg-gray-50 flex w-full text-black rounded-md p-5 drop-shadow-md mb-8 items-center`}>
+                <div className={`bg-gray-200 bg-opacity-60 flex w-full text-black rounded-md p-5 drop-shadow-md mb-8 items-center`}>
                     {/* user avatar */}
                     <div className={`mr-8`}>
                         <Avatar sx={{ width: 100, height: 100 }} alt="Remy Sharp" src="images/user=2.jpg" />
                     </div>
                     {/* user name-uni */}
                     <div>
-                        <div className={`text-2xl text-gray-700`}>
+                        <div className={`text-2xl text-gray-100`}>
                             Ömer Faruk KÖSE
                         </div>
                         <div className={`text-xl text-gray-600`}>
@@ -58,7 +58,7 @@ export default function Project(){
                     </div>
                 </div>
 
-                <div className={`bg-gray-50 flex w-full h-96 text-black rounded-md p-3 drop-shadow-md`}>
+                <div className={`bg-gray-200 bg-opacity-60 flex w-full h-96 text-black rounded-md p-3 drop-shadow-md`}>
                     Profile Menu
                 </div>
             </div>
@@ -67,7 +67,7 @@ export default function Project(){
 
     const _renderProjectsMenuContent = () => {
         return(
-            <div className={`bg-white flex w-full h-96 text-black rounded-md p-3 drop-shadow-md`}>
+            <div className={`bg-gray-200 bg-opacity-60 flex w-full h-96 text-black rounded-md p-3 drop-shadow-md`}>
                 Projects
             </div>
         )
@@ -75,7 +75,7 @@ export default function Project(){
 
     const _renderTodoListMenuContent = () => {
         return(
-            <div className={`bg-white flex w-full h-96 text-black rounded-md p-3 drop-shadow-md`}>
+            <div className={`bg-gray-200 bg-opacity-60 flex w-full h-96 text-black rounded-md p-3 drop-shadow-md`}>
                 Todo List
             </div>
         )
@@ -95,11 +95,12 @@ export default function Project(){
                                 setSelectedMenuIndex(index)
                             }}
                             className={`
-                                ${selectedMenuIndex === index ? `border-2 border-purple-color` :`border-0`} 
+                                ${selectedMenuIndex === index ? `border-2 border-white` :`border-0`} 
                                 flex p-3 mb-8 
                                 w-64 h-16 
                                 items-center 
-                                bg-gray-50
+                                bg-gray-300
+                                bg-opacity-60
                                 rounded-md   
                                 drop-shadow-md 
                                 cursor-pointer
@@ -109,7 +110,7 @@ export default function Project(){
                                 {Menu.icon}
                             </div>
 
-                            <div className={`text-gray-500 text-xl`}>
+                            <div className={`text-white text-xl`}>
                                 {Menu.title}
                             </div>
 

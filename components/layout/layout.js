@@ -1,24 +1,24 @@
-// import Sidebar from "../testSidebar";
-import Sidebar from "../sidebar";
-import Navbar from "../navbar";
-// import Navbar from "../testNavbar";
+import Sidebar from "../testSidebar";
+// import Sidebar from "../sidebar";
+// import Navbar from "../navbar";
+import Navbar from "../testNavbar";
 import {useContext} from "react";
 import {UserContext} from "../../contexts/UserContext";
 import Footer from "../footer";
 
 export default function Layout (props) {
-    let {children, sidebar=true, footer=true, navbar=true} = props;
+    let {children, sidebar=true, footer=true, navbar=true, navbarItems=true} = props;
 
     let { isSidebarOpen, isLogin } = useContext(UserContext);
 
     // bg-gradient-to-r from-purple-600 to-blue-500
 
     return(
-        <div className={'min-h-screen min-w-screen flex flex-col flex-auto flex-shrink-0 bg-purple-color'}>
+        <div className={'min-h-screen min-w-screen flex flex-col flex-auto flex-shrink-0 bg-gradient-to-r from-purple-600 to-blue-500'}>
 
             {
                 navbar &&
-                <Navbar/>
+                <Navbar navbarItems={navbarItems}/>
             }
 
             {

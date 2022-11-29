@@ -1,15 +1,15 @@
 export default function Footer(){
 
     return(
-        <div className={'flex w-full h-48 bg-purple-color items-center'}>
+        <div className={'flex w-full h-48 items-center bg-gradient-to-r from-purple-600 to-blue-500'}>
 
             {/* logo */}
-            <div className={'flex-1 text-white font-sans text-xl text-center justify-center '} style={{fontFamily: 'Inter',fontWeight: 500}}>
+            <div className={'flex-1 text-white font-sans text-xl text-center justify-center opacity-50'} style={{fontFamily: 'Inter',fontWeight: 500}}>
                 unipo.
             </div>
 
             {/**/}
-            <div className={'flex-1 text-white font-sans text-xl justify-center text-center'} >
+            <div className={'flex-1 text-white font-sans text-xl justify-center text-center opacity-50'} >
                 info@unipo.com
             </div>
         </div>

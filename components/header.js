@@ -3,7 +3,7 @@ import Button from "./ui/button";
 export  default function Header(){
 
     return(
-        <div className={"w-full px-40 flex py-24 bg-purple-color"}>
+        <div className={"w-full px-40 flex py-24"}>
 
             {/* left view */}
             <div className={"basis-1/2 pr-40 flex flex-col justify-evenly"}>
@@ -19,7 +19,7 @@ export  default function Header(){
 
                 <div className={"items-start w- justify-between flex w-full"}>
                     <div className={'bg-white items-center w-36 justify-center p-3 px-5 rounded-md cursor-pointer'}>
-                        <p className={'text-purple-color font-medium text-sm text-center'}> Proje Bul </p>
+                        <p className={'text-purple-color font-medium text-sm text-center'}> Proje Ara </p>
                     </div>
                     <div className={'bg-blue-400 w-36 items-center justify-center p-3 px-5 rounded-md cursor-pointer'}>
                         <p className={'text-white font-base text-sm text-center '}> Proje Oluştur </p>

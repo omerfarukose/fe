@@ -1,5 +1,5 @@
 import {myPostRequest} from "./myPostRequest";
-import {GET_CATEGORIES, LOG_OUT_URL, SIGN_IN_URL, SIGN_UP_URL} from "../public/strings/url";
+import {CREATE_PROJECT, GET_CATEGORIES, LOG_OUT_URL, SIGN_IN_URL, SIGN_UP_URL} from "../public/strings/url";
 import {myGetRequest} from "./myGetRequest";
 
 // auth
@@ -50,6 +50,17 @@ export const LogOutRequest = ( userData ) => {
 export const GetCategories = ( ) => {
     return new Promise((resolve, reject) => {
         myGetRequest("Get Categories",GET_CATEGORIES)
+            .then(response => {
+                resolve(response)
+            })
+            .catch((error => reject(error)))
+    })
+}
+
+// categories
+export const CreateProjectRequest = ( requestData ) => {
+    return new Promise((resolve, reject) => {
+        myGetRequest("Create Project",CREATE_PROJECT, requestData)
             .then(response => {
                 resolve(response)
             })

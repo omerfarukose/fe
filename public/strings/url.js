@@ -7,3 +7,7 @@ export const LOG_OUT_URL = "/users/oauth/revoke";
 
 // categories
 export const GET_CATEGORIES = "/categories/categories";
+
+// project
+export const CREATE_PROJECT = "/projects/create";
+export const GET_PROJECT = "/projects";

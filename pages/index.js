@@ -11,8 +11,9 @@ export default function Home() {
   let text1 = "Her seviyeden npm paketleri gelistirerek frontenship toplulugunda yer alan herkesi açık kaynaklı projelere contribution yapmaya ve referans gösterebilecekleri isler"
   let text2 = "Git kullanmak ekip çalısması yapabilmek, ekosistemde yaygın olarak kullanılan tooların kullanımını ve amaçlarını aktararak da alanda yen kisileri ilk is deneyimlerine hazırlamak."
   let text3 = "Sorular sorabilmek veya soruları cevaplayarak herkesin seviyesini tespit etmesini ve gelistirmesini saglamak amaçlı yardımlasmak."
+
   useEffect(() => {
-    console.log("User Data : ",userData)
+    // console.log("User Data : ",userData)
 
     if(!userData){
       setIsLogin(false)

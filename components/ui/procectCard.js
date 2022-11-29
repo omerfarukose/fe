@@ -2,23 +2,25 @@ export default function ProjectCard(props){
 
     return(
         <div className="mt-4 mx-4 my-2">
+
             <div className="overflow-hidden rounded-lg shadow-xs">
 
                 <div className="w-full overflow-x-auto">
+
                     <table className="w-full">
 
                         <thead>
-                        <tr className="text-xs font-semibold tracking-wide text-left text-gray-200 border-b bg-third-color">
-                            <th className="px-4 py-3">Takım Üyeleri</th>
-                            <th className="px-4 py-3">Amount</th>
-                            <th className="px-4 py-3">Status</th>
-                            <th className="px-4 py-3">Date</th>
-                        </tr>
+                            <tr className="text-xs font-semibold tracking-wide text-left text-gray-200 border-b bg-opacity-50 bg-gray-200">
+                                <th className="px-4 py-3">Takım Üyeleri</th>
+                                <th className="px-4 py-3">Amount</th>
+                                <th className="px-4 py-3">Status</th>
+                                <th className="px-4 py-3">Date</th>
+                            </tr>
                         </thead>
 
                         <tbody className="bg-white divide-y">
 
-                        <tr className="bg-gray-50 hover:bg-gray-100 text-gray-700">
+                        <tr className="bg-gray-50 hover:bg-gray-100 text-gray-700 bg-opacity-50">
                             <td className="px-4 py-3">
                                 <div className="flex items-center text-sm">
                                     <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">

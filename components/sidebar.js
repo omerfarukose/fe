@@ -1,6 +1,7 @@
 import {useContext} from "react";
 import {UserContext} from "../contexts/UserContext";
 
+
 function Sidebar(){
     let { isSidebarOpen, setIsSidebarOpen} = useContext(UserContext);
 

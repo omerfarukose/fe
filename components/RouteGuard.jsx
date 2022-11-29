@@ -36,7 +36,7 @@ function RouteGuard({ children }) {
         const publicPaths = ['/login'];
         const path = url.split('?')[0];
 
-        console.log("URL : ",url)
+        // console.log("URL : ",url)
 
         let localIsLogin = localStorage.getItem("isLogin")
 

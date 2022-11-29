@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { useRouter } from 'next/router'
-import {GetCategories, LoginRequest, SignInRequest, SignUpRequest} from "../request/RequestList";
+import { SignInRequest, SignUpRequest} from "../request/RequestList";
 import {Snackbar} from "@mui/material";
 import {UserContext} from "../contexts/UserContext";
 import Layout from "../components/layout/layout";
@@ -8,8 +8,6 @@ import Layout from "../components/layout/layout";
 export default function Login() {
 
     const router = useRouter()
-
-    let { setUserInfoData, setIsLogin } = useContext(UserContext);
 
     const [formType, setFormType] = useState("signIn");
     const [email, setEmail] = useState("");
@@ -29,7 +27,7 @@ export default function Login() {
         }
     }
 
-    function _signUpRequest(){
+    function _signUp(){
 
         event.preventDefault();
 
@@ -72,29 +70,25 @@ export default function Login() {
             .then((response) => {
                 console.log("login response : ",response)
 
-                setUserInfoData(response)
-                setIsLogin(true)
-
-                if (typeof window !== "undefined") {
-                    localStorage.setItem("isLogin","true")
-                    localStorage.setItem("userData",response)
-                }
-
+                _setLocaleData(response?.data)
 
                 router.push("/")
             })
             .catch((error) => {
                 console.log("Login error : ",error)
-
                 setAlertMessage(error.message)
                 setShowSnackbar(true)
             })
     }
 
-    function _handleSubmit(){
+    function _setLocaleData( data ){
+        let userData = JSON.stringify(data)
+        let userInfo = JSON.stringify(data?.user)
 
-        formType === "signIn" ? _signInRequest() : _signUpRequest()
-
+        if (typeof window !== "undefined") {
+            localStorage.setItem("userData",userData)
+            localStorage.setItem("userInfo",userInfo)
+        }
     }
 
     const _renderInputView = ( type, placeholder, value ) => {
@@ -105,9 +99,9 @@ export default function Login() {
                     id={type}
                     value={value}
                     onChange={ e => handleInputChange(type, e.target.value)}
-                    className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    className="bg-gray-300 bg-opacity-40 placeholder-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder={placeholder}
-                    required=""/>
+                    required/>
             </div>
         )
     }
@@ -148,7 +142,7 @@ export default function Login() {
 
     const _renderSignUpInputForm = ( ) => {
         return(
-            <form onSubmit={_signUpRequest} className={"flex flex-col w-full items-center"}>
+            <form onSubmit={_signUp} className={"flex flex-col w-full items-center"}>
 
                 {/* e mail input */}
                 { _renderInputView("email","E-Mail", email) }
@@ -180,10 +174,8 @@ export default function Login() {
     }
 
     return (
-        <Layout sidebar={false} navbar={false}>
-            <div className={"flex flex-col bg-purple-color w-screen min-h-screen items-center justify-center"}>
-
-                <div className={"text-white text-2xl"}>unipo.</div>
+        <Layout sidebar={false} navbar={true} navbarItems={false}>
+            <div className={"flex flex-col w-screen min-h-screen items-center justify-center"}>
 
                 {/* form container */}
                 <div  className={'flex w-1/2 text-white rounded p-10 items-center justify-center'}>

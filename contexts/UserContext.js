@@ -11,7 +11,7 @@ export function UserContextProvider({ children }) {
 
     const setUserInfoData = ( value ) => {
         if(value){
-            setUserData(value)
+            setUserData(value?.data)
             setUserInfo(value?.data?.user)
         }
         else {
@@ -19,7 +19,6 @@ export function UserContextProvider({ children }) {
             setUserData(null)
             setUserInfo(null)
         }
-
     }
 
     return (
