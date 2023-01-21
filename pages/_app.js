@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import {UserContextProvider} from "../contexts/UserContext";
-import {RouteGuard} from "../components/RouteGuard";
+import {RouteGuard} from "../adapter/Helper/RouterGuard/RouteGuard";
 import { Inter } from '@next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })

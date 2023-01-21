@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Jomhuria&family=Roboto:wght@300;400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Jomhuria&family=Roboto:wght@300;400&display=swap');
 
 html,
 body {
@@ -26,6 +27,6 @@ a {
   }
   body {
     color: white;
-    background-color: #515fe1;
+    background-color: #f4f5f7;
   }
 }

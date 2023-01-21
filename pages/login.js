@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import { useRouter } from 'next/router'
 import {Snackbar} from "@mui/material";
-import Layout from "../components/layout/layout";
-import {SignInRequest, SignUpRequest} from "../request/Auth";
+import Layout from "../components/main/layout";
+import {SignInRequest, SignUpRequest} from "../adapter/API/request/Auth";
+import {sampleUserData} from "../values/SampleData";
 
 export default function Login() {
 

@@ -1,23 +1,6 @@
+import {sampleProjectCardData as sampleData} from "../../values/SampleData";
+
 export default function Card(props){
-
-    let { title, text } = props
-
-    let sampleData = {
-        owner: "Ömer Faruk KÖSE",
-        createdAt: "01.01.2023",
-        university: "Pamukkale Üniversitesi",
-        name: "Awesome Mobile App",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-        jobTags: ["front-end","back-end","devops","designer"],
-    }
-
-    const _renderTagItem = () => {
-        return(
-            <div>
-
-            </div>
-        )
-    }
 
     return(
         <div className={"flex flex-row h-80 rounded-lg m-4 bg-white cursor-pointer drop-shadow-2xl"}>
