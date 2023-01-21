@@ -9,11 +9,11 @@ const inter = Inter({ subsets: ['latin'] })
 function MyApp({ Component, pageProps }) {
   return (
       <UserContextProvider>
-        <RouteGuard>
+        {/*<RouteGuard>*/}
           <main className={inter.className}>
             <Component {...pageProps} />
           </main>
-        </RouteGuard>
+        {/*</RouteGuard>*/}
       </UserContextProvider>
   )
 }

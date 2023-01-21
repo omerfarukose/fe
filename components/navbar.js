@@ -36,11 +36,12 @@ export default function Navbar() {
     },[userInfo])
 
     function handleLogout(){
-        let requestData = {
-            token: userData?.data?.access_token,
-        }
-
-        LogOutRequest(requestData);
+        console.log("navbar > handleLogout")
+        // let requestData = {
+        //     token: userData?.data?.access_token,
+        // }
+        //
+        // LogOutRequest(requestData);
 
         setIsLogin(false)
         setUserInfoData(null)

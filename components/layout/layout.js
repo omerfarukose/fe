@@ -14,7 +14,7 @@ export default function Layout (props) {
     // bg-gradient-to-r from-purple-600 to-blue-500
 
     return(
-        <div className={'min-h-screen min-w-screen flex flex-col flex-auto flex-shrink-0 bg-gradient-to-r from-purple-600 to-blue-500'}>
+        <div className={'min-h-screen min-w-screen flex flex-col flex-auto flex-shrink-0 bg-body'}>
 
             {
                 navbar &&

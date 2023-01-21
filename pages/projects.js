@@ -13,15 +13,14 @@ export default function Project(){
                     <Card/>
                     <Card/>
                     <Card/>
-                    <ProjectCard/>
-                    <ProjectCard/>
-                    <ProjectCard/>
-                    <ProjectCard/>
-                    <ProjectCard/>
-                    <ProjectCard/>
-                    <ProjectCard/>
-                    <ProjectCard/>
-                    <ProjectCard/>
+                    <Card/>
+                    <Card/>
+                    <Card/>
+                    <Card/>
+                    <Card/>
+                    <Card/>
+                    <Card/>
+                    <Card/>
                 </div>
 
             </div>

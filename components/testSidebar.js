@@ -9,7 +9,7 @@ function Sidebar(){
     let { isSidebarOpen, setIsSidebarOpen} = useContext(UserContext);
 
     const Menus = [
-        { title: "Gelen Davetler", icon: <HiOutlineUserPlus size={23}/> },
+        { title: "Gelen Davetler", icon: <RiSettingsLine size={23}/> },
         { title: "Yapılacaklar", icon: <RiSettingsLine size={23}/> },
         { title: "Yapılacaklar", icon: <MdChecklist size={23}/> },
         { title: "Ayarlar", icon: <RiSettingsLine size={23}/>  },
@@ -35,7 +35,7 @@ function Sidebar(){
                             text-gray-300
                             text-sm items-center`}>
 
-                        {Menu.icon}
+                            {Menu.icon}
 
                         <span className={`${!isSidebarOpen && "hidden"} origin-left duration-300 truncate`}>
                             {Menu.title}

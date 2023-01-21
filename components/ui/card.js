@@ -2,73 +2,76 @@ export default function Card(props){
 
     let { title, text } = props
 
+    let sampleData = {
+        owner: "Ömer Faruk KÖSE",
+        createdAt: "01.01.2023",
+        university: "Pamukkale Üniversitesi",
+        name: "Awesome Mobile App",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+        jobTags: ["front-end","back-end","devops","designer"],
+    }
+
+    const _renderTagItem = () => {
+        return(
+            <div>
+
+            </div>
+        )
+    }
+
     return(
-        <div className={"bg-opacity-50 bg-gray-200 rounded-lg mt-4 mx-4 my-2 flex flex-row"}>
+        <div className={"flex flex-row h-80 rounded-lg m-4 bg-white cursor-pointer drop-shadow-2xl"}>
 
-            <div className={"overflow-hidden shadow-xs"}>
                 {/* left side */}
-                <div>
-                    {/* title - subtitle - created at */}
-                    <div>
+                <div className={`flex flex-col flex-1`}>
 
-                        {/* title */}
-                        <div>
-                            Project Title
-                        </div>
-
-                        {/* subtitle */}
-                        <div>
-                            Project subtitle
-                        </div>
-
-                        {/* created at */}
-                        <div>
-                            12:12:2022
-                        </div>
+                    {/* left title */}
+                    <div className={`rounded-tl-lg p-2 text-gray-700 font-bold`}>
+                        <p>
+                            { sampleData.name }
+                        </p>
                     </div>
 
-                    {/* description */}
-                    <div>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-                    </div>
+                    {/*left body*/}
+                    <div className={`flex flex-1 flex-col`}>
 
-                    <div>
-
-                        {/* project owner & university */}
-                        <div>
-
-                            {/* project owner */}
-                            <div>
-                                project owner
-                            </div>
-
-                            {/* project university */}
-                            <div>
-                                university
-                            </div>
-
+                        {/* description */}
+                        <div className={`text-gray-700 flex flex-1 p-2`}>
+                            <p>
+                                { sampleData.description }
+                            </p>
                         </div>
 
-                        {/* project detail */}
-                        <div>
-                            project detail
+                        {/* project university */}
+                        <div className={`text-gray-700 font-bold p-2 rounded-bl-lg`}>
+                            <p>
+                                { sampleData.university }
+                            </p>
                         </div>
 
                     </div>
-                </div>
-
-                {/* right side */}
-                <div>
-                    test
-                </div>
-            </div>
-
-            <div className={'bg-white lg:visible'}>
-
-                Right side
 
             </div>
 
+            {/*right view*/}
+            <div className={'flex flex-col bg-tartOrange lg:visible w-48 rounded-tr-lg rounded-br-lg'}>
+
+                <div className={`flex flex-1 items-center justify-center`}>
+                    tag view
+                </div>
+
+                {/* project owner */}
+                <div className={`text-white flex flex-col items-center justify-center`}>
+                    <p>
+                        { sampleData.owner }
+                    </p>
+
+                    <p>
+                        { sampleData.createdAt }
+                    </p>
+                </div>
+
+            </div>
 
         </div>
     )

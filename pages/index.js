@@ -27,15 +27,11 @@ export default function Home() {
 
         <Header/>
 
-        <div className={`bg-white w-full flex flex-col justify-center py-24 px-20`}>
+        <div className={`bg-gray-100 w-full flex flex-col justify-center py-24 px-20`}>
 
           <div className={"flex flex-col mb-12 justify-center items-center"}>
             <p className={"text-5xl -mb-7 text-blue-100"}>unipo'ya neden katılmalıyım?</p>
             <p className={"text-4xl text-center font-bold text-blue-400"}>unipo'ya neden katılmalıyım?</p>
-          </div>
-
-          <div className={"flex flex-col justify-center w-2/5 self-center"}>
-            <p className={"text-center font-thin text-card-text"}>Frontend alanında sıfırdan ileri seviyelere kadar sektöre katkı saglayacak içerikler üretmek ve toplulugda destek saglamak istiyoruz.</p>
           </div>
 
           {/* card list */}

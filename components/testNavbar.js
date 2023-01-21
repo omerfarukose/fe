@@ -24,26 +24,26 @@ export default function Navbar(props) {
     const userData = useRef();
     const userInfo = useRef();
 
-    const [userName, setUserName] = useState("");
+    const [userName, setUserName] = useState("test");
 
     useEffect(() => {
 
-        userData.current = JSON.parse(localStorage.getItem("userData"));
-        userInfo.current = JSON.parse(localStorage.getItem("userInfo"));
-
-        let infoMail = userInfo.current?.email
-
-        let myUserName = infoMail?.substr(0, infoMail.indexOf('@'));
-
-        setUserName(myUserName)
+        // userData.current = JSON.parse(localStorage.getItem("userData"));
+        // userInfo.current = JSON.parse(localStorage.getItem("userInfo"));
+        //
+        // let infoMail = userInfo.current?.email
+        //
+        // let myUserName = infoMail?.substr(0, infoMail.indexOf('@'));
+        //
+        // setUserName(myUserName)
     }, []);
 
     function handleLogout(){
-        let requestData = {
-            token: userData.current?.access_token,
-        }
-
-        LogOutRequest(requestData);
+        // let requestData = {
+        //     token: userData.current?.access_token,
+        // }
+        //
+        // LogOutRequest(requestData);
 
         localStorage.setItem("isLogin", false)
         localStorage.setItem("userData",null)
@@ -53,7 +53,7 @@ export default function Navbar(props) {
     }
 
     return(
-        <div className={'fixed w-full h-12 bg-gradient-to-r from-purple-600 to-blue-500 flex items-center justify-between z-10 px-8'}>
+        <div className={'fixed w-full h-12 bg-gradient-to-r from-orange-500 to-red-400 flex items-center justify-between z-10 px-8'}>
 
             {
                 navbarItems &&
@@ -63,6 +63,7 @@ export default function Navbar(props) {
 
                     <IconButton tooltip={"Home"} href={"/"} icon={<CgHomeAlt size={22}/>}/>
 
+                    {/* search bar */}
                     <div className={'flex bg-opacity-40 bg-gray-200 mr-2 w-80 items-center justify-end p-2 rounded-sm cursor-pointer'}>
                         <Tooltip title="Home">
                             <HiOutlineSearch size={22}/>
@@ -87,6 +88,14 @@ export default function Navbar(props) {
                         <IconButton tooltip={"Yeni Proje"} href={"/newProject"} icon={<AiOutlinePlus size={22}/>}/>
 
                         <IconButton tooltip={"Bildirmler"} href={"/projects"} icon={<IoNotificationsOutline size={22}/>}/>
+
+                        {/*<div className="dropdown">*/}
+                        {/*    <ul>*/}
+                        {/*        <li><a href="#"><i className="fas fa-user"></i> Profile</a></li>*/}
+                        {/*        <li><a href="#"><i className="fas fa-sliders-h"></i> Settings</a></li>*/}
+                        {/*        <li><a href="#"><i className="fas fa-sign-out-alt"></i> Signout</a></li>*/}
+                        {/*    </ul>*/}
+                        {/*</div>*/}
 
                         <IconButton tooltip={"Mesajlar"} href={"/projects"} icon={<BiMessageSquareDots size={22}/>}/>
 

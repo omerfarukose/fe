@@ -2,7 +2,7 @@ import Layout from "../components/layout/layout";
 import {useContext, useEffect, useState} from "react";
 import {UserContext} from "../contexts/UserContext";
 import { useRouter } from 'next/router'
-import { FaRegUser, FaTasks, FaHandMiddleFinger } from 'react-icons/fa'
+import { FaRegUser, FaTasks, FaHandMiddleFinger, FaAt } from 'react-icons/fa'
 import {Avatar} from "@mui/material";
 
 
@@ -12,15 +12,15 @@ export default function Project(){
 
     const router = useRouter()
 
-    useEffect(() => {
-        if(!isLogin){
-            router.push("/login")
-        }
-    }, []);
+    // useEffect(() => {
+    //     if(!isLogin){
+    //         router.push("/login")
+    //     }
+    // }, []);
 
     const Menus = [
         { title: "Profil", icon: <FaRegUser color={"white"}/>},
-        { title: "Projelerim", icon: <FaHandMiddleFinger color={"white"}/>},
+        { title: "Projelerim", icon: <FaAt color={"white"}/>},
         { title: "Yapılacaklar", icon: <FaTasks color={"white"}/>},
     ];
 
