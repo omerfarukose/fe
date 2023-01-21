@@ -7,41 +7,44 @@ function Sidebar(){
     let { isSidebarOpen, setIsSidebarOpen} = useContext(UserContext);
 
     const Menus = [
-        { title: "Gelen Davetler", icon: <RiSettingsLine size={23}/> },
-        { title: "Yapılacaklar", icon: <RiSettingsLine size={23}/> },
-        { title: "Yapılacaklar", icon: <MdChecklist size={23}/> },
-        { title: "Ayarlar", icon: <RiSettingsLine size={23}/>  },
+        { title: "Gelen Davetler", icon: <RiSettingsLine color={"white"} size={23}/> },
+        { title: "Yapılacaklar", icon: <RiSettingsLine color={"white"} size={23}/> },
+        { title: "Yapılacaklar", icon: <MdChecklist color={"white"} size={23}/> },
+        { title: "Ayarlar", icon: <RiSettingsLine color={"white"} size={23}/>  },
     ];
 
     return(
-        <div className={`${isSidebarOpen ? "w-56" : "w-20"} fixed flex flex-col top-12 transition-all border-none z-10 pl-8 pr-4  sidebar bg-opacity-20 h-screen duration-300`}>
+        <div className={`${isSidebarOpen ? "w-56" : "w-24"} fixed flex flex-col top-12 transition-all border-none z-10 pl-8 pr-4 pt-6 sidebar bg-opacity-20 h-screen duration-300`}>
 
             <img
+                alt={"sidebar-control-image"}
                 src="/static/images/control.png"
                 className={`${!isSidebarOpen && "rotate-180"} absolute cursor-pointer -right-3 top-7 w-7 border-dark-purple border-2 rounded-full`}
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}/>
 
-            <ul className="pt-6">
-
                 {Menus.map((Menu, index) => (
                     <div
                         key={index}
-                        className={`
-                            ${Menu.gap ? "mt-9" : "mt-2"}
-                            bg-opacity-40 bg-gray-200
+                        className={`                            
+                            bg-tartOrange mt-2
                             flex rounded-sm p-2 cursor-pointer
-                            text-gray-300
-                            text-sm items-center`}>
+                            items-center`
+                        }>
 
                             {Menu.icon}
 
-                        <span className={`${!isSidebarOpen && "hidden"} origin-left duration-300 truncate`}>
-                            {Menu.title}
-                          </span>
+                        <div className={`${!isSidebarOpen && "hidden"} origin-left duration-300 truncate ml-2`}>
+
+                            <p className={"text-white text-sm "}>
+
+                                {Menu.title}
+
+                            </p>
+
+                        </div>
+
                     </div>
                 ))}
-
-            </ul>
 
         </div>
     )
