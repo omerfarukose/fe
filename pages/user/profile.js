@@ -42,20 +42,26 @@ export default function Project(){
             <div className={`flex flex-col w-full`}>
 
                 {/* user avatar & name-uni */}
-                <div className={`bg-gray-200 bg-opacity-60 flex w-full text-black rounded-md p-5 drop-shadow-md mb-8 items-center`}>
+                <div className={`bg-blue-one-color flex w-full text-black rounded-md p-5 drop-shadow-md mb-8 items-center`}>
+
                     {/* user avatar */}
                     <div className={`mr-8`}>
                         <Avatar sx={{ width: 100, height: 100 }} alt="Remy Sharp" src="/static/images/user2.jpg" />
                     </div>
+
                     {/* user name-uni */}
                     <div>
+
                         <div className={`text-2xl text-gray-100`}>
                             Ömer Faruk KÖSE
                         </div>
-                        <div className={`text-xl text-gray-600`}>
+
+                        <div className={`text-xl text-white`}>
                             Pamukkale Üniversitesi - Bilgisayar Mühendisliği
                         </div>
+
                     </div>
+
                 </div>
 
                 <div className={`bg-gray-200 bg-opacity-60 flex w-full h-96 text-black rounded-md p-3 drop-shadow-md`}>
@@ -82,8 +88,14 @@ export default function Project(){
     }
 
     return(
-        <Layout>
-            <div className={`flex w-full h-full p-8`}>
+        <Layout sidebar={false}>
+            <div
+                className={`
+                    flex 
+                    w-full 
+                    h-full 
+                    p-8
+                `}>
 
                 {/* menu list */}
                 <div className={`mr-8`}>
@@ -91,19 +103,11 @@ export default function Project(){
                     {Menus.map((Menu, index) => (
                         <div
                             key={index}
-                            onClick={() => {
-                                setSelectedMenuIndex(index)
-                            }}
+                            onClick={() => setSelectedMenuIndex(index)}
                             className={`
                                 ${selectedMenuIndex === index ? `border-2 border-white` :`border-0`} 
-                                flex p-3 mb-8 
-                                w-64 h-16 
-                                items-center 
-                                bg-gray-300
-                                bg-opacity-60
-                                rounded-md   
-                                drop-shadow-md 
-                                cursor-pointer
+                                flex p-3 mb-8 w-64 h-16 items-center bg-blue-one-color
+                                rounded-md drop-shadow-md cursor-pointer drop-shadow-2xl
                             `}>
 
                             <div className={`mr-2`}>
@@ -111,7 +115,9 @@ export default function Project(){
                             </div>
 
                             <div className={`text-white text-xl`}>
+
                                 {Menu.title}
+
                             </div>
 
                         </div>
@@ -120,11 +126,19 @@ export default function Project(){
                 </div>
 
                 {/* menu content */}
-                <div className={`flex w-full h-96`}>
+                <div
+                    className={`
+                        flex
+                        w-full 
+                        h-96
+                    `}>
+
                     { _renderMenuContent() }
+
                 </div>
 
             </div>
+
         </Layout>
     )
 }

@@ -4,7 +4,6 @@ export const UserContext = createContext();
 
 export function UserContextProvider({ children }) {
     const [isLogin, setIsLogin] = useState(false);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const [userData, setUserData] = useState({});
     const [userInfo, setUserInfo] = useState({});
@@ -25,7 +24,6 @@ export function UserContextProvider({ children }) {
         <UserContext.Provider
             value={{
                 isLogin, setIsLogin,
-                isSidebarOpen, setIsSidebarOpen,
                 userData, setUserInfoData,
                 userInfo, setUserInfo,
             }}>

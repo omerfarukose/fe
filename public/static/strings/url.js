@@ -11,3 +11,4 @@ export const GET_CATEGORIES = "/categories/categories";
 // project
 export const CREATE_PROJECT = "/projects/create";
 export const GET_PROJECT = "/projects";
+export const GET_POPULAR_PROJECT = "/popularProjects";

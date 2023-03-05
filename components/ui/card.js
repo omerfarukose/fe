@@ -3,10 +3,11 @@ import {sampleProjectCardData as sampleData} from "../../values/SampleData";
 export default function Card(props){
 
     return(
-        <div className={"flex flex-row h-80 rounded-lg m-4 bg-white cursor-pointer drop-shadow-2xl"}>
+        <div
+            className={"flex flex-row h-80 rounded-lg m-4 bg-white cursor-pointer drop-shadow-2xl"}>
 
                 {/* left side */}
-                <div className={`flex flex-col flex-1`}>
+                <div className={`flex flex-col flex-1 overflow-hidden`}>
 
                     {/* left title */}
                     <div className={`rounded-tl-lg p-2 text-gray-700 font-bold`}>
@@ -16,17 +17,17 @@ export default function Card(props){
                     </div>
 
                     {/*left body*/}
-                    <div className={`flex flex-1 flex-col`}>
+                    <div className={`flex flex-1 flex-col overflow-scroll`}>
 
                         {/* description */}
-                        <div className={`text-gray-700 flex flex-1 p-2`}>
+                        <div className={`text-gray-700 flex flex-1 p-2 overflow-scroll`}>
                             <p>
                                 { sampleData.description }
                             </p>
                         </div>
 
                         {/* project university */}
-                        <div className={`text-gray-700 font-bold p-2 rounded-bl-lg`}>
+                        <div className={`text-gray-700 font-bold p-2 rounded-bl-lg absolute bottom-0`}>
                             <p>
                                 { sampleData.university }
                             </p>
@@ -37,7 +38,7 @@ export default function Card(props){
             </div>
 
             {/*right view*/}
-            <div className={'flex flex-col bg-tartOrange lg:visible w-48 rounded-tr-lg rounded-br-lg'}>
+            <div className={'flex flex-col bg-blue-one-color lg:visible w-48 rounded-tr-lg rounded-br-lg'}>
 
                 <div className={`flex flex-1 items-center justify-center`}>
                     tag view

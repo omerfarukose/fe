@@ -5,13 +5,23 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontSize: {
+      sm: '0.8rem',
+      medium: '0.9rem',
+      base: '1rem',
+      xl: '1.25rem',
+      '2xl': '1.563rem',
+      '3xl': '1.953rem',
+      '4xl': '2.441rem',
+      '5xl': '3.052rem',
+    },
     extend: {
       fontFamily: {
         sans: ['BR Firma', 'sans-serif'],
       },
       colors: {
         "body": "#f4f5f7",
-        "main-color": "#00072d",
+        "main-color": "#1f2937",
         "second-color": "#001c55",
         "third-color": "#0a2472",
         "fourth-color": "#0e6ba8",
@@ -65,6 +75,7 @@ module.exports = {
         "hookersGreen": "#4E6E5D",
         "magicMint": "#9df7e5",
         "pastelPink": "#E5A9A9",
+        "navbarColor": "#1f2937",
       },
     },
   },

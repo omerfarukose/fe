@@ -74,10 +74,7 @@ export default  function CreateProject(){
         return(
             <div className={"w-2/3"}>
 
-                <p
-                    className={`
-                        text-white text-lg`
-                    }>
+                <p className={`text-main-color text-lg`}>
 
                     {label}
 
@@ -91,7 +88,7 @@ export default  function CreateProject(){
                     className="
                         bg-gray-200 bg-opacity-40
                         border border-gray-300
-                        text-white text-sm
+                        text-main-color text-sm
                         rounded-lg block w-full p-2.5
                         focus:ring-blue-500 focus:border-gray-200
                         outline-0"
@@ -116,6 +113,7 @@ export default  function CreateProject(){
                         flex items-center justify-center
                         h-36
                         w-full text-4xl 
+                        text-main-color
                     `}>
 
                     <p className={"font-sans"}>
@@ -129,6 +127,7 @@ export default  function CreateProject(){
                     className={`
                         flex flex-col justify-evenly items-center
                         w-full
+                        
                     `}>
 
                     {
@@ -143,21 +142,11 @@ export default  function CreateProject(){
 
                     {
                         createStep === 2 &&
-                        _renderTextField("Takım Listesi", team, setTeam)
+                        _renderTextField("Proje İçin Aran Roller", tagId, setTagId)
                     }
 
                     {
                         createStep === 3 &&
-                        _renderTextField("Üniversite", universityId, setUniversityId)
-                    }
-
-                    {
-                        createStep === 4 &&
-                        _renderTextField("Proje TAG Listesi", tagId, setTagId)
-                    }
-
-                    {
-                        createStep === 5 &&
                         <Select
                             className={`w-1/2`}
                             isMulti
@@ -167,8 +156,8 @@ export default  function CreateProject(){
                     }
 
                     {
-                        createStep === 6 &&
-                        <div>
+                        createStep === 4 &&
+                        <div className={"text-main-color"}>
                             Projeniz Oluşturuldu !
                         </div>
                     }

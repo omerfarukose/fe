@@ -1,33 +1,44 @@
+import React from "react";
 import Layout from "../components/main/layout";
-import {useContext, useEffect} from "react";
+import {ProjectCard} from "../components/ui/projectCard";
+import {useContext, useEffect, useState} from "react";
 import {UserContext} from "../contexts/UserContext";
+import {GetPopularProjectsRequest} from "../adapter/API/request/Project";
 
 export default function Home() {
 
-  const { userData, setIsLogin } = useContext(UserContext);
-
-  useEffect(() => {
-    if(!userData){
-      setIsLogin(false)
-    }
-
-  }, []);
-
+  // const { userData, setIsLogin } = useContext(UserContext);
+  // const [projectList, setProjectList] = useState([]);
+  //
+  // useEffect(() => {
+  //     // get project list
+  //     _getPopularProjects()
+  //
+  //     if(!userData){
+  //         setIsLogin(false)
+  //     }
+  // }, []);
+  //
+  // const _getPopularProjects = ( ) => {
+  //   GetPopularProjectsRequest()
+  //       .then((response) => {
+  //           setProjectList(response?.data)
+  //       })
+  //       .catch((error) => {})
+  // }
 
   return (
-      <Layout sidebar={false}>
+      <Layout>
 
-        <div className={`flex w-full h-64 items-center justify-center text-tartOrange font-bold text-[60px] `}>
-          <p>
-            Awesome Home Page !
-          </p>
-        </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2">
 
-        <div className={`bg-gray-100 w-full flex flex-col justify-center py-24 px-20`}>
+              {/*sample project cards*/}
+              <ProjectCard/>
+              <ProjectCard/>
+              <ProjectCard/>
+              <ProjectCard/>
 
-            <p className={"text-4xl text-center font-bold text-tartOrange"}>unipo'ya neden katılmalıyım?</p>
-
-        </div>
+          </div>
 
       </Layout>
   )
