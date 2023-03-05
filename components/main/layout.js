@@ -24,7 +24,7 @@ export default function Layout (props) {
                 <Sidebar/>
             }
 
-            <main className={`${sidebar ? isSidebarOpen ? "ml-64" : "ml-20 " : "ml-0"} duration-300 mt-16 min-h-screen`}>
+            <main className={`${sidebar ? isSidebarOpen ? "ml-64" : "ml-20 " : "ml-0"} duration-500 mt-12 min-h-screen`}>
                 {children}
             </main>
 

@@ -86,7 +86,7 @@ export default function Login() {
                     id={type}
                     value={value}
                     onChange={ e => setValue(e.target.value)}
-                    className="bg-gray-300 bg-opacity-40 placeholder-gray-100 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    className="bg-gray-300 bg-opacity-40 placeholder-gray-100 border border-gray-300 text-main-color text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                     placeholder={type}
                     required/>
             </div>
@@ -96,10 +96,16 @@ export default function Login() {
     return (
         <Layout sidebar={false} navbar={true} navbarItems={false}>
 
-            <div className={"flex flex-col w-screen min-h-screen items-center justify-center"}>
+            <div className={"flex w-screen min-h-screen items-center justify-center bg-white"}>
 
-                {/* form container */}
-                <div  className={'flex w-1/2 text-white rounded p-10 items-center justify-center'}>
+                {/* form view */}
+                <div  className={'flex flex-col w-1/2 text-white rounded p-10 items-center justify-center'}>
+
+                    <div className={"text-4xl font-bold text-main-color"}>
+
+                        unipo.
+
+                    </div>
 
                     <form onSubmit={showSignIn ? _handleSignIn : _handleSignUp } className={"flex flex-col w-full items-center"}>
 
@@ -133,13 +139,22 @@ export default function Login() {
 
                 </div>
 
-                <Snackbar
-                    open={showSnackbar}
-                    autoHideDuration={6000}
-                    onClose={() => setShowSnackbar(false)}
-                    message={alertMessage}/>
+                {/*image view*/}
+                <div className={"h-1/2 w-1/2"}>
+                    <img
+                        alt={"sidebar-control-image"}
+                        src="/static/images/team-image.png"
+                        className={"h-full w-full"}
+                       />
+                </div>
 
             </div>
+
+            <Snackbar
+                open={showSnackbar}
+                autoHideDuration={6000}
+                onClose={() => setShowSnackbar(false)}
+                message={alertMessage}/>
 
         </Layout>
     )

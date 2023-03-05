@@ -3,19 +3,15 @@ import { useEffect, useRef, useState, useContext } from "react";
 import { IoMdLogIn } from 'react-icons/io'
 import { CgHomeAlt } from 'react-icons/cg'
 import { HiOutlineSearch } from 'react-icons/hi'
-import { BsGrid3X3GapFill } from 'react-icons/bs'
 import { Tooltip } from "@mui/material";
 import { useRouter } from "next/router";
 import IconButton from "../ui/iconButton";
-import {LayoutContext} from "../../contexts/LayoutContext";
 
 export default function Navbar(props) {
 
     const router = useRouter()
 
     let { navbarItems } = props
-
-    let { isSidebarOpen, setIsSidebarOpen} = useContext(LayoutContext);
 
     function handleLogout(){
         // let requestData = {
@@ -32,17 +28,10 @@ export default function Navbar(props) {
     }
 
     return(
-        <div className={'fixed w-full h-12 bg-main-color flex items-center justify-between z-10'}>
+        <div className={`fixed w-full h-[50px] bg-main-color flex items-center justify-between z-10`}>
 
             {/* button group view */}
             <div className={"flex flex-1 pl-2"}>
-
-                {/*sidebar button*/}
-                <div
-                    className={`bg-opacity-40 bg-gray-200 mr-2 items-center justify-center p-2 aspect-square rounded-sm cursor-pointer`}
-                    onClick={() => {setIsSidebarOpen(!isSidebarOpen)}}>
-                    <BsGrid3X3GapFill size={22}/>
-                </div>
 
                 {/* home button */}
                 <IconButton tooltip={"Home"} href={"/"} icon={<CgHomeAlt size={22}/>}/>
