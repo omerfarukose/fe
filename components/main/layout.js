@@ -4,6 +4,7 @@ import Sidebar from "./sidebar";
 import Navbar from "./navbar";
 import Footer from "./footer";
 import {LayoutContext} from "../../contexts/LayoutContext";
+import Testbar from "./testbar";
 
 export default function Layout (props) {
 
@@ -12,7 +13,7 @@ export default function Layout (props) {
     let { isSidebarOpen, isLogin } = useContext(LayoutContext);
 
     return(
-        <div className={'min-h-screen min-w-screen flex flex-col flex-auto flex-shrink-0 bg-body'}>
+        <div className={'min-h-screen min-w-screen flex flex-col flex-auto flex-shrink-0 bg-test-body'}>
 
             {
                 navbar &&
@@ -21,7 +22,7 @@ export default function Layout (props) {
 
             {
                 sidebar &&
-                <Sidebar/>
+                <Testbar/>
             }
 
             <main className={`${sidebar ? isSidebarOpen ? "ml-64" : "ml-20 " : "ml-0"} duration-500 mt-12 min-h-screen`}>

@@ -3,24 +3,30 @@ import {GiGreekTemple} from 'react-icons/gi'
 import {BiUser} from 'react-icons/bi'
 import {BiTime} from 'react-icons/bi'
 import Link from "next/link";
+import {LayoutContext} from "../../contexts/LayoutContext";
+import {useContext} from "react";
 
-export const ProjectCard = () => {
+export const TestCard = ( props ) => {
 
     const roleList = [ "front-end", "back-end", "designer", "tester", "ömer", "kemal" ];
 
+    let { setContentType } = useContext(LayoutContext);
+
     const _renderRoleItem = (title) => {
         return(
-            <div className="bg-white text-second-color rounded-lg text-medium flex justify-center items-center">
+            <div className="bg-test-white text-second-color rounded text-medium flex justify-center items-center">
                 {title}
             </div>
         )
     }
 
     return(
-        <Link href="/project/projectDetail" className="flex flex-row border border-gray-200 rounded-lg border-2 m-4 text-gray-700 h-96 cursor-pointer">
+        <div
+            onClick={() => setContentType(1)}
+            className="flex flex-row bg-test-gray w-full h-fit p-2 rounded-md mb-2 cursor-pointer">
 
             {/* left view */}
-            <div className="p-8 w-4/6 flex flex-col bg-white rounded">
+            <div className="p-8 w-4/6 flex flex-col rounded">
 
                 {/* title */}
                 <div>
@@ -44,7 +50,7 @@ export const ProjectCard = () => {
                 </div>
 
                 {/* project detail */}
-                <div className={"text-sm flex flex-1 items-center"}>
+                <div className={"text-sm flex flex-1 items-center my-5"}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum...
                 </div>
 
@@ -78,7 +84,7 @@ export const ProjectCard = () => {
             </div>
 
             {/* right view */}
-            <div className="bg-test-bgg w-2/6 py-8 rounded-tr-lg rounded-br-lg text-white flex flex-col items-center justify-between">
+            <div className="w-2/6 py-8 rounded-tr-lg rounded-br-lg text-white flex flex-col items-center justify-between">
 
                 {/* title */}
                 <div className={"font-bold"}>
@@ -100,28 +106,9 @@ export const ProjectCard = () => {
 
                 </div>
 
-                {/* team info */}
-                {/*<div className="flex flex-col justify-center items-center align-bottom">*/}
-
-                {/*    <div className="mb-2 font-bold">*/}
-                {/*        Proje Ekibi*/}
-                {/*    </div>*/}
-
-                {/*    <AvatarGroup max={4}>*/}
-
-                {/*        <Avatar alt="ömer" sx={{ width: 35, height: 35 }} src="/static/images/user2.jpg"/>*/}
-                {/*        <Avatar alt="ömer" sx={{ width: 35, height: 35 }} src="/static/images/user2.jpg"/>*/}
-                {/*        <Avatar alt="ömer" sx={{ width: 35, height: 35 }} src="/static/images/user2.jpg"/>*/}
-                {/*        <Avatar alt="ömer" sx={{ width: 35, height: 35 }} src="/static/images/user2.jpg"/>*/}
-                {/*        <Avatar alt="ömer" sx={{ width: 35, height: 35 }} src="/static/images/user2.jpg"/>*/}
-
-                {/*    </AvatarGroup>*/}
-
-                {/*</div>*/}
-
             </div>
 
-        </Link>
+        </div>
     )
 
 }

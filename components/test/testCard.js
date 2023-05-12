@@ -4,7 +4,7 @@ import {BiUser} from 'react-icons/bi'
 import {BiTime} from 'react-icons/bi'
 import Link from "next/link";
 
-export const ProjectCard = () => {
+export const Card = ( props ) => {
 
     const roleList = [ "front-end", "back-end", "designer", "tester", "ömer", "kemal" ];
 
@@ -17,7 +17,7 @@ export const ProjectCard = () => {
     }
 
     return(
-        <Link href="/project/projectDetail" className="flex flex-row border border-gray-200 rounded-lg border-2 m-4 text-gray-700 h-96 cursor-pointer">
+        <div className="flex flex-row border border-gray-200 rounded-lg border-2 m-4 text-gray-700 h-96 cursor-pointer">
 
             {/* left view */}
             <div className="p-8 w-4/6 flex flex-col bg-white rounded">
@@ -100,28 +100,9 @@ export const ProjectCard = () => {
 
                 </div>
 
-                {/* team info */}
-                {/*<div className="flex flex-col justify-center items-center align-bottom">*/}
-
-                {/*    <div className="mb-2 font-bold">*/}
-                {/*        Proje Ekibi*/}
-                {/*    </div>*/}
-
-                {/*    <AvatarGroup max={4}>*/}
-
-                {/*        <Avatar alt="ömer" sx={{ width: 35, height: 35 }} src="/static/images/user2.jpg"/>*/}
-                {/*        <Avatar alt="ömer" sx={{ width: 35, height: 35 }} src="/static/images/user2.jpg"/>*/}
-                {/*        <Avatar alt="ömer" sx={{ width: 35, height: 35 }} src="/static/images/user2.jpg"/>*/}
-                {/*        <Avatar alt="ömer" sx={{ width: 35, height: 35 }} src="/static/images/user2.jpg"/>*/}
-                {/*        <Avatar alt="ömer" sx={{ width: 35, height: 35 }} src="/static/images/user2.jpg"/>*/}
-
-                {/*    </AvatarGroup>*/}
-
-                {/*</div>*/}
-
             </div>
 
-        </Link>
+        </div>
     )
 
 }

@@ -48,7 +48,7 @@ export default function Navbar(props) {
             {/* logo */}
             <div className={"flex flex-1 items-center justify-center w-full absolute -z-10 align-middle opacity-50 cursor-pointer"}>
                 <Link href={"/"}>
-                    <p className={"text-xl font-bold"}>
+                    <p className={"text-xl font-bold text-white"}>
                         unipo.
                     </p>
                 </Link>
