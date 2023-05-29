@@ -33,7 +33,7 @@ export const SidebarButton = ( props ) => {
     return(
         <div
             onClick={() => setContentType(type)}
-            className={"flex flex-row mb-2 cursor-pointer"}>
+            className={"flex items-center flex-row mb-2 cursor-pointer text-test-white font-semibold"}>
 
             { _renderButtonIcon(type) }
 

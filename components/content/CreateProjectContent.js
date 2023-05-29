@@ -1,10 +1,27 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {BackButton} from "../ui/BackButton";
+import {CreateProjectRequest, SetProjectMemberRequest} from "../../adapter/API/request/Project";
+import {UserContext} from "../../contexts/UserContext";
 
 export default function CreateProjectContent (props) {
 
+    let { userId } = useContext(UserContext);
+
     const [projectName, setProjectName] = useState("");
     const [projectDescription, setProjectDescription] = useState("");
+
+    function _handleCreateProject(){
+        let requestData = {
+            owner: userId,
+            name: projectName,
+            description: projectDescription
+        }
+
+        CreateProjectRequest(requestData)
+            .then((response) => {
+                console.log("project created !")
+            })
+    }
 
     const _renderInputItem = ( title, value, setValue ) => {
         return(
@@ -18,6 +35,7 @@ export default function CreateProjectContent (props) {
                     type={"1"}
                     id={"1"}
                     value={value}
+                    autoComplete={"off"}
                     spellCheck={false}
                     onChange={ e => setValue(e.target.value)}
                     className="bg-test-white text-test-gray text-sm rounded-sm w-full p-2.5"
@@ -42,7 +60,9 @@ export default function CreateProjectContent (props) {
 
             <div className={"flex justify-center mt-8"}>
 
-                <div className={"bg-green-600 p-2 rounded text-test-gray font-medium"}>
+                <div
+                    onClick={() => _handleCreateProject()}
+                    className={"cursor-pointer bg-green-600 p-2 rounded text-test-gray font-medium"}>
                     Create
                 </div>
 

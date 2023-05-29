@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export const ProjectCard = () => {
 
-    const roleList = [ "front-end", "back-end", "designer", "tester", "ömer", "kemal" ];
+    const roleList = [ "front-end", "back-end", "designer", "tester", "devops" ];
 
     const _renderRoleItem = (title) => {
         return(

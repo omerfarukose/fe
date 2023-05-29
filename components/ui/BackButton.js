@@ -18,7 +18,6 @@ export const BackButton = ( props ) => {
                     <FaChevronCircleLeft color={"#b3b3b3"} size={22}/>
                 </div>
 
-
                 <p className={"ml-4 text-xl"}>
                     {title}
                 </p>

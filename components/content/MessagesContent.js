@@ -15,6 +15,7 @@ export default function MessagesContent (props) {
                 value={value}
                 spellCheck={false}
                 placeholder={placeholder}
+                autoComplete={"off"}
                 onChange={ e => setValue(e.target.value)}
                 className="flex-1 bg-test-white rounded p-2 text-test-gray placeholder-gray-500"
                 required/>

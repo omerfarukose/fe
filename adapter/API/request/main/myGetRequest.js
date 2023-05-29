@@ -7,7 +7,7 @@ export const myGetRequest = ( requestName, url ) => {
     console.log(requestName," Request url : ", requestURL)
 
     return new Promise((resolve, reject) => {
-        axios.get(requestURL)
+        axios.get('https://2368-85-98-225-95.ngrok-free.app/all_projects')
             .then(response => {
                 console.log(requestName," Response : ", response)
                 resolve(response)

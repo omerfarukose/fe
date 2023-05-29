@@ -1,15 +1,20 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {BackButton} from "../ui/BackButton";
 import {Avatar} from "@mui/material";
 import {FiSearch} from "react-icons/fi";
+import {LayoutContext} from "../../contexts/LayoutContext";
 
 export default function SearchContent (props) {
 
     const [searchText, setSearchText] = useState("");
+    let { setContentType } = useContext(LayoutContext);
+
 
     const _renderUniCard = ( logo, title ) => {
         return(
-            <div className={"w-36 bg-test-second-gray h-48 flex flex-col items-center justify-evenly rounded cursor-pointer hover:bg-test-third-gray"}>
+            <div
+                onClick={() => setContentType(7)}
+                className={"w-36 bg-test-second-gray h-48 flex flex-col items-center justify-evenly rounded cursor-pointer hover:bg-test-third-gray"}>
 
                 <div className={"border border-2 border-white rounded-full"}>
                     <Avatar sx={{ width: 80, height: 80 }} alt="Remy Sharp" src={"/static/uni-logo/" + logo} />
@@ -27,9 +32,9 @@ export default function SearchContent (props) {
 
             <BackButton title={"Search"}/>
 
-            <div className={"flex items-center p-3 w-full mb-6"}>
+            <div className={"flex items-center p-3 px-5 w-full mb-6"}>
 
-                <div className={"mx-3"}>
+                <div className={"mx-2"}>
                     <FiSearch color={"#b3b3b3"} size={30}/>
                 </div>
 
@@ -38,6 +43,7 @@ export default function SearchContent (props) {
                     id={"1"}
                     value={searchText}
                     spellCheck={false}
+                    autoComplete={"off"}
                     placeholder={"Search for university, project, student..."}
                     onChange={ e => setSearchText(e.target.value)}
                     className="w-full bg-test-white rounded p-2 text-test-gray placeholder-gray-500"

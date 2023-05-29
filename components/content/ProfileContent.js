@@ -19,6 +19,7 @@ export default function ProfileContent (props) {
                     id={"1"}
                     value={value}
                     spellCheck={false}
+                    autoComplete={"off"}
                     onChange={ e => setValue(e.target.value)}
                     className="bg-test-second-gray rounded rounded-tr-none rounded-br-none flex-1 p-2 px-4 text-test-white placeholder-test-gray"
                     required/>

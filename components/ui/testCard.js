@@ -2,15 +2,47 @@ import { Avatar, AvatarGroup } from "@mui/material";
 import {GiGreekTemple} from 'react-icons/gi'
 import {BiUser} from 'react-icons/bi'
 import {BiTime} from 'react-icons/bi'
-import Link from "next/link";
 import {LayoutContext} from "../../contexts/LayoutContext";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
+import {GetUserDataRequest} from "../../adapter/API/request/Project";
 
 export const TestCard = ( props ) => {
 
-    const roleList = [ "front-end", "back-end", "designer", "tester", "ömer", "kemal" ];
+    let { projectData } = props;
 
+    let { setProjectData } = useContext(LayoutContext);
     let { setContentType } = useContext(LayoutContext);
+
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        if (projectData?.owner){
+            getUserDate(projectData?.owner)
+        } else {
+            getUserDate(8)
+        }
+    }, []);
+
+    function formatDate(date){
+        const originalTime =  date;
+        const formattedTime = new Date(originalTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const formattedDate = new Date(originalTime).toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+        const convertedTime = `${formattedTime} ${formattedDate}`;
+
+        return convertedTime
+    }
+
+    function getUserDate(userId){
+        let requestData = {
+            id: userId
+        }
+
+        GetUserDataRequest(requestData)
+            .then((response) => {
+                setUsername(response?.data?.username)
+            })
+    }
 
     const _renderRoleItem = (title) => {
         return(
@@ -22,7 +54,10 @@ export const TestCard = ( props ) => {
 
     return(
         <div
-            onClick={() => setContentType(1)}
+            onClick={() => {
+                setProjectData(projectData)
+                setContentType(1)
+            }}
             className="flex flex-row bg-test-gray w-full h-fit p-2 rounded-md mb-2 cursor-pointer">
 
             {/* left view */}
@@ -33,7 +68,7 @@ export const TestCard = ( props ) => {
 
                     {/* project name */}
                     <div className={"text-lg font-bold"}>
-                        Project Name
+                        { projectData?.name }
                     </div>
 
                     {/* owner university */}
@@ -42,7 +77,9 @@ export const TestCard = ( props ) => {
                         <BiTime size={15}/>
 
                         <div className={"ml-2 text-medium"}>
-                            1 week ago
+                            {
+                                formatDate(projectData?.created_at)
+                            }
                         </div>
 
                     </div>
@@ -51,7 +88,7 @@ export const TestCard = ( props ) => {
 
                 {/* project detail */}
                 <div className={"text-sm flex flex-1 items-center my-5"}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum...
+                    { projectData?.description }
                 </div>
 
                 {/* owner info */}
@@ -63,21 +100,21 @@ export const TestCard = ( props ) => {
                         <BiUser size={15}/>
 
                         <div className={"ml-2"}>
-                            Ömer Faruk KÖSE
+                            { username }
                         </div>
 
                     </div>
 
-                    {/* owner university */}
-                    <div className={"flex"}>
+                    {/*/!* owner university *!/*/}
+                    {/*<div className={"flex"}>*/}
 
-                        <GiGreekTemple size={15}/>
+                    {/*    <GiGreekTemple size={15}/>*/}
 
-                        <div className={"ml-2"}>
-                            PAMUKKALE UNIVERSITY
-                        </div>
+                    {/*    <div className={"ml-2"}>*/}
+                    {/*        { projectData?.university }*/}
+                    {/*    </div>*/}
 
-                    </div>
+                    {/*</div>*/}
 
                 </div>
 
@@ -94,15 +131,15 @@ export const TestCard = ( props ) => {
                 {/* roles */}
                 <div className="flex w-full">
 
-                    <div className="grid grid-cols-2 p-4 gap-2 w-full">
+                    {/*<div className="grid grid-cols-2 p-4 gap-2 w-full">*/}
 
-                        {
-                            roleList.map((role) => (
-                                _renderRoleItem(role)
-                            ))
-                        }
+                    {/*    {*/}
+                    {/*        roles?.map((role) => (*/}
+                    {/*            _renderRoleItem(role)*/}
+                    {/*        ))*/}
+                    {/*    }*/}
 
-                    </div>
+                    {/*</div>*/}
 
                 </div>
 

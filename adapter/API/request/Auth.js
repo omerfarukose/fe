@@ -3,7 +3,7 @@ import {LOG_OUT_URL, SIGN_IN_URL, SIGN_UP_URL} from "../../../public/static/stri
 
 export const SignUpRequest = (userData ) => {
     let requestData = {
-        email: userData.email,
+        username: userData.username,
         password: userData.password,
     }
 
@@ -14,11 +14,10 @@ export const SignUpRequest = (userData ) => {
     })
 }
 
-export const SignInRequest = ( userData ) => {
+export const SignInRequest = ( data ) => {
     let requestData = {
-        grant_type: "password",
-        email: userData.email,
-        password: userData.password,
+        username: data.username,
+        password: data.password,
     }
 
     return new Promise((resolve, reject) => {

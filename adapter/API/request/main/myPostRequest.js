@@ -4,19 +4,11 @@ import {BASE_URL} from "../../../../public/static/strings/url";
 export const myPostRequest = (requestName, url, requestData ) => {
     let requestURL = BASE_URL + url;
 
-    let env = process.env;
-
-    let data = {
-        client_id: env.NEXT_PUBLIC_CLIENT_ID,
-        client_secret: env.NEXT_PUBLIC_CLIENT_SECRET,
-        ...requestData,
-    }
-
-    console.log(requestName, " Request data : ", data)
-    console.log(requestName," Request url : ", requestURL)
+    console.log("Request URL : ", requestURL)
+    console.log("Request Data : ", requestData)
 
     return new Promise((resolve, reject) => {
-        axios.post(requestURL, data)
+        axios.post(requestURL, requestData)
             .then(response => {
                 console.log(requestName," Response : ", response)
                 resolve(response)

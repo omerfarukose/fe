@@ -7,6 +7,7 @@ export function LayoutContextProvider({ children }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [showContent, setShowContent] = useState(false);
     const [contentType, setContentType] = useState(0);
+    const [projectData, setProjectData] = useState({});
 
     return (
         <LayoutContext.Provider
@@ -14,6 +15,7 @@ export function LayoutContextProvider({ children }) {
                 isSidebarOpen, setIsSidebarOpen,
                 showContent, setShowContent,
                 contentType, setContentType,
+                projectData, setProjectData,
             }}>
 
             {children}

@@ -1,58 +1,159 @@
-import React from "react";
-import Layout from "../components/main/layout";
-import {ProjectCard} from "../components/ui/projectCard";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
+import {Snackbar} from "@mui/material";
+import {useRouter} from "next/router";
 import {UserContext} from "../contexts/UserContext";
-import {GetPopularProjectsRequest} from "../adapter/API/request/Project";
+import {SignInRequest} from "../adapter/API/request/Auth";
 
-export default function Home() {
+export default function Login() {
 
-  // const { userData, setIsLogin } = useContext(UserContext);
-  // const [projectList, setProjectList] = useState([]);
-  //
-  // useEffect(() => {
-  //     // get project list
-  //     _getPopularProjects()
-  //
-  //     if(!userData){
-  //         setIsLogin(false)
-  //     }
-  // }, []);
-  //
-  // const _getPopularProjects = ( ) => {
-  //   GetPopularProjectsRequest()
-  //       .then((response) => {
-  //           setProjectList(response?.data)
-  //       })
-  //       .catch((error) => {})
-  // }
+    const router = useRouter()
 
-  return (
-      <Layout>
+    let { setUserId } = useContext(UserContext);
 
-          {/*<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2">*/}
+    const [isSignIn, setIsSignIn] = useState(true);
 
-          <div className={"flex flex-1 items-center justify-center"}>
+    const [mail, setMail] = useState("");
+    const [password, setPassword] = useState("");
 
-              <div className="w-2/3">
+    const [showSnackbar, setShowSnackbar] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("Login Failed");
 
-                  {/* sample project cards */}
-                  <ProjectCard/>
-                  <ProjectCard/>
-                  <ProjectCard/>
-                  <ProjectCard/>
-                  <ProjectCard/>
-                  <ProjectCard/>
-                  <ProjectCard/>
-                  <ProjectCard/>
-                  <ProjectCard/>
-                  <ProjectCard/>
-                  <ProjectCard/>
+    function _handleSignUp(){
 
-              </div>
-          </div>
+        // event.preventDefault();
+        //
+        // let userData = {
+        //     email: email,
+        //     password: password
+        // }
+        //
+        // SignUpRequest(userData)
+        //     .then((response) => {
+        //         setAlertMessage("User Created")
+        //         setShowSnackbar(true)
+        //     })
+        //     .catch((error) => {
+        //         console.log("Login error : ",error)
+        //
+        //         setAlertMessage(error.message)
+        //         setShowSnackbar(true)
+        //     })
+    }
+
+    function _handleSignIn(){
+        console.log("_handleSignIn")
+
+        let userData = {
+            username: mail,
+            password: password
+        }
+
+        SignInRequest(userData)
+            .then((response) => {
+                console.log("login response : ",response.data)
+
+                setUserId(response?.data?.id)
+
+                event.preventDefault();
+                router.push("/home")
+            })
+            .catch((error) => {
+                console.log("Login error : ",error)
+                setAlertMessage(error.message)
+                setShowSnackbar(true)
+            })
+    }
+
+    const _renderInputItem = ( value, setValue, placeholder, hideText = false ) => {
+        return(
+            <input
+                type={hideText ? "password" : ""}
+                id={"1"}
+                value={value}
+                spellCheck={false}
+                autoComplete={"off"}
+                placeholder={placeholder}
+                onChange={ e => setValue(e.target.value)}
+                className="bg-test-white rounded w-4/5 p-2 text-test-gray placeholder-test-gray"
+                required/>
+        )
+    }
+
+    return(
+        <div className={'flex flex-col bg-black min-h-screen'}>
+
+            <p className={"text-white p-2 ml-2 text-xl font-bold text-test-white"}>
+                unipo.
+            </p>
+
+            <div className={"flex flex-1 flex-col justify-center items-center"}>
+
+                <div className={"flex flex-col bg-test-gray w-1/3 h-96 rounded-md justify-evenly items-center p-4"}>
+
+                    <div className={"text-test-white justify-center font-bold text-2xl"}>
+                        unipo.
+                    </div>
+
+                    <>
+                        { _renderInputItem(mail, setMail, "mail")}
+                        { _renderInputItem(password, setPassword, "password", true)}
+                    </>
+
+                    <div className={"flex flex-row w-4/5 justify-evenly"}>
+
+                        <div
+                            onClick={() => {
+                                if (isSignIn) {
+                                    _handleSignIn()
+                                } else {
+                                    _handleSignUp()
+                                }
+                            }}
+                            className={"cursor-pointer flex bg-forestGreenCrayola rounded w-1/3 p-2 justify-center text-test-gray"}>
+
+                            <div
+                                >
+
+                                {
+                                    isSignIn ?
+                                        "login"
+                                        :
+                                        "create"
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div
+                    onClick={() => {
+                        setIsSignIn(!isSignIn)
+                    }}
+                    className={"flex justify-center p-2 rounded bg-test-gray w-1/3 mt-4 text-test-white cursor-pointer"}>
+
+                    {
+                        isSignIn ?
+                            "create account"
+                            :
+                            "login"
+                    }
 
 
-      </Layout>
-  )
+                </div>
+
+
+                <Snackbar
+                    open={showSnackbar}
+                    autoHideDuration={6000}
+                    onClose={() => setShowSnackbar(false)}
+                    message={alertMessage}/>
+
+
+            </div>
+
+        </div>
+    )
 }

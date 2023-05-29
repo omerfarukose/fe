@@ -14,7 +14,7 @@ export const Sidebar = ( ) => {
         return(
             <div
                 onClick={() => setContentType(1)}
-                className={"flex flex-row items-center mb-4 hover:bg-gray-800 hover:rounded p-1"}>
+                className={"flex flex-row items-center mb-4 hover:bg-test-third-gray hover:rounded p-1"}>
 
                 <div className={"h-10 w-10 mr-2 bg-test-white rounded flex justify-center items-center text-black"}>
                     P
@@ -40,11 +40,11 @@ export const Sidebar = ( ) => {
         <div className={"w-1/6"}>
 
             {/*main buttons*/}
-            <div className={"bg-test-gray h-fit p-3 rounded-md text-test-white justify-center font-bold mb-3"}>
+            <div className={"bg-test-gray h-fit p-3 rounded-md justify-center mb-3"}>
 
                 <SidebarButton title={"Home"} type={0}/>
                 <SidebarButton title={"Profile"} type={3}/>
-                <SidebarButton title={"Messages"} type={4}/>
+                {/*<SidebarButton title={"Messages"} type={4}/>*/}
                 <SidebarButton title={"Search"} type={5}/>
                 <SidebarButton title={"Settings"} type={2}/>
 
@@ -77,7 +77,7 @@ export const Sidebar = ( ) => {
             {/*logout button*/}
             <Link
                 className={"flex bg-test-gray p-3 h-fit rounded-md items-center text-test-white cursor-pointer font-bold mb-3"}
-                href={"/test/login"}>
+                href={"/"}>
 
                 <FiLogIn color={"#b3b3b3"} size={20}/>
 

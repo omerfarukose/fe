@@ -82,6 +82,7 @@ export default  function CreateProject(){
 
                 <input
                     type={"text"}
+                    autoComplete={"off"}
                     value={value}
                     spellCheck={"false"}
                     onChange={(e) => onChange(e.target.value)}
