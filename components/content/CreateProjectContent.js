@@ -5,7 +5,7 @@ import {UserContext} from "../../contexts/UserContext";
 
 export default function CreateProjectContent (props) {
 
-    let { userId } = useContext(UserContext);
+    let { userId, userUniversityId } = useContext(UserContext);
 
     const [projectName, setProjectName] = useState("");
     const [projectDescription, setProjectDescription] = useState("");
@@ -14,12 +14,23 @@ export default function CreateProjectContent (props) {
         let requestData = {
             owner: userId,
             name: projectName,
-            description: projectDescription
+            description: projectDescription,
+            university_id: userUniversityId,
         }
 
         CreateProjectRequest(requestData)
             .then((response) => {
                 console.log("project created !")
+
+                let requestData = {
+                    user_id: userId,
+                    project_id: response?.data?.id
+                }
+
+                SetProjectMemberRequest(requestData)
+                    .then(() => {
+                        console.log("User added to member list !")
+                    })
             })
     }
 

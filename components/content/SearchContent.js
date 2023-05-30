@@ -7,13 +7,16 @@ import {LayoutContext} from "../../contexts/LayoutContext";
 export default function SearchContent (props) {
 
     const [searchText, setSearchText] = useState("");
-    let { setContentType } = useContext(LayoutContext);
+    let { setContentType, setSelectedUniversity } = useContext(LayoutContext);
 
 
-    const _renderUniCard = ( logo, title ) => {
+    const _renderUniCard = ( logo, title, id ) => {
         return(
             <div
-                onClick={() => setContentType(7)}
+                onClick={() => {
+                    setSelectedUniversity(id)
+                    setContentType(7)
+                }}
                 className={"w-36 bg-test-second-gray h-48 flex flex-col items-center justify-evenly rounded cursor-pointer hover:bg-test-third-gray"}>
 
                 <div className={"border border-2 border-white rounded-full"}>
@@ -32,46 +35,25 @@ export default function SearchContent (props) {
 
             <BackButton title={"Search"}/>
 
-            <div className={"flex items-center p-3 px-5 w-full mb-6"}>
-
-                <div className={"mx-2"}>
-                    <FiSearch color={"#b3b3b3"} size={30}/>
-                </div>
-
-                <input
-                    type={"1"}
-                    id={"1"}
-                    value={searchText}
-                    spellCheck={false}
-                    autoComplete={"off"}
-                    placeholder={"Search for university, project, student..."}
-                    onChange={ e => setSearchText(e.target.value)}
-                    className="w-full bg-test-white rounded p-2 text-test-gray placeholder-gray-500"
-                    required/>
-
-            </div>
-
-
-
             <div className={"grid grid-cols-6 place-items-center gap-4"}>
 
-                { _renderUniCard("pau-logo.png", "PAÜ")}
-                { _renderUniCard("hacettepe-logo.png", "HÜ")}
-                { _renderUniCard("itu-logo.jpeg", "İTÜ")}
-                { _renderUniCard("marmara-logo.png", "MÜ")}
-                { _renderUniCard("odtu-logo.jpeg", "ODTU")}
-                { _renderUniCard("yildiz-logo.png", "YTÜ")}
-                { _renderUniCard("bogazici-logo.jpeg", "BOUN")}
-                { _renderUniCard("ege-logo.png", "EGE")}
-                { _renderUniCard("akdeniz-logo.jpeg", "AKDÜ")}
-                { _renderUniCard("bau-logo.jpeg", "BAU")}
-                { _renderUniCard("bilkent-logo.png", "BILKENT")}
-                { _renderUniCard("dokuz-logo.jpeg", "DEÜ")}
-                { _renderUniCard("katu-logo.png", "KATÜ")}
-                { _renderUniCard("koc-logo.png", "KOÇ")}
-                { _renderUniCard("msk-logo.png", "MSKÜ")}
-                { _renderUniCard("ohu-logo.png", "ÖHÜ")}
-                { _renderUniCard("beykent-logo.png", "BEYKENT")}
+                { _renderUniCard("pau-logo.png", "PAÜ", 1)}
+                { _renderUniCard("marmara-logo.png", "MÜ", 2)}
+                { _renderUniCard("ege-logo.png", "EGE", 3)}
+                { _renderUniCard("akdeniz-logo.jpeg", "AKDÜ", 4)}
+                { _renderUniCard("yildiz-logo.png", "YTÜ", 5)}
+                {/*{ _renderUniCard("itu-logo.jpeg", "İTÜ")}*/}
+                {/*{ _renderUniCard("hacettepe-logo.png", "HÜ")}*/}
+                {/*{ _renderUniCard("odtu-logo.jpeg", "ODTU")}*/}
+                {/*{ _renderUniCard("bogazici-logo.jpeg", "BOUN")}*/}
+                {/*{ _renderUniCard("bau-logo.jpeg", "BAU")}*/}
+                {/*{ _renderUniCard("bilkent-logo.png", "BILKENT")}*/}
+                {/*{ _renderUniCard("dokuz-logo.jpeg", "DEÜ")}*/}
+                {/*{ _renderUniCard("katu-logo.png", "KATÜ")}*/}
+                {/*{ _renderUniCard("koc-logo.png", "KOÇ")}*/}
+                {/*{ _renderUniCard("msk-logo.png", "MSKÜ")}*/}
+                {/*{ _renderUniCard("ohu-logo.png", "ÖHÜ")}*/}
+                {/*{ _renderUniCard("beykent-logo.png", "BEYKENT")}*/}
 
             </div>
 

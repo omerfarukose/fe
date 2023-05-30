@@ -5,6 +5,7 @@ export const SignUpRequest = (userData ) => {
     let requestData = {
         username: userData.username,
         password: userData.password,
+        university_id: userData.university_id
     }
 
     return new Promise((resolve, reject) => {

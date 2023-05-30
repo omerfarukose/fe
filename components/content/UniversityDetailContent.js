@@ -1,18 +1,40 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {BackButton} from "../ui/BackButton";
 import {Avatar} from "@mui/material";
 import {TbSchool} from "react-icons/tb";
 import {BsFillHeartFill} from "react-icons/bs";
 import {AiOutlineUser} from "react-icons/ai";
+import {LayoutContext} from "../../contexts/LayoutContext";
+import {GetUniversityProjectListRequest} from "../../adapter/API/request/Project";
+import {TestCard} from "../ui/testCard";
 
 export default function UniversityDetailContent (props) {
 
+    let { selectedUniversity } = useContext(LayoutContext);
+
+    const [projectList, setProjectList] = useState([]);
+
+    useEffect(() => {
+        getUniversityProjectList()
+    }, []);
+
+    function getUniversityProjectList(){
+        let requestData = {
+            university_id: selectedUniversity
+        }
+
+        GetUniversityProjectListRequest(requestData)
+            .then((response) => {
+                setProjectList(response?.data)
+            })
+    }
+
     return(
-        <div className="flex flex-1 flex-col bg-test-gray w-full mx-3 mb-3 rounded">
+        <div className="flex flex-1 flex-col w-full mx-3 mb-3 rounded">
 
             <BackButton title={"University"}/>
 
-            <div className={"p-6 flex"}>
+            <div className={"p-6 flex bg-test-gray mb-2"}>
 
                 <div className={"w-48 bg-test-second-gray h-48 flex flex-col items-center justify-evenly rounded cursor-pointer hover:bg-test-third-gray"}>
 
@@ -48,8 +70,11 @@ export default function UniversityDetailContent (props) {
 
             </div>
 
-
-
+            {
+                projectList.map((data, index) => (
+                    <TestCard key={index} projectData={data}/>
+                ))
+            }
 
         </div>
     )

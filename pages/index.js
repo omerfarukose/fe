@@ -2,13 +2,14 @@ import React, {useContext, useState} from "react";
 import {Snackbar} from "@mui/material";
 import {useRouter} from "next/router";
 import {UserContext} from "../contexts/UserContext";
-import {SignInRequest} from "../adapter/API/request/Auth";
+import {SignInRequest, SignUpRequest} from "../adapter/API/request/Auth";
+import {UniversityList} from "../values/Constants";
 
 export default function Login() {
 
     const router = useRouter()
 
-    let { setUserId } = useContext(UserContext);
+    let { setUserId, setUserUniversityId } = useContext(UserContext);
 
     const [isSignIn, setIsSignIn] = useState(true);
 
@@ -18,26 +19,56 @@ export default function Login() {
     const [showSnackbar, setShowSnackbar] = useState(false);
     const [alertMessage, setAlertMessage] = useState("Login Failed");
 
-    function _handleSignUp(){
+    function _getUniversityId(){
+        let universityId = -1;
 
-        // event.preventDefault();
-        //
-        // let userData = {
-        //     email: email,
-        //     password: password
-        // }
-        //
-        // SignUpRequest(userData)
-        //     .then((response) => {
-        //         setAlertMessage("User Created")
-        //         setShowSnackbar(true)
-        //     })
-        //     .catch((error) => {
-        //         console.log("Login error : ",error)
-        //
-        //         setAlertMessage(error.message)
-        //         setShowSnackbar(true)
-        //     })
+        UniversityList.map((item, index) => {
+            console.log("item : ", item )
+            console.log("is valid : ", mail.includes(item?.mailValue))
+
+            if (mail.includes(item?.mailValue)) {
+                universityId = item?.id
+                return item?.id
+            }
+        })
+
+        return universityId
+    }
+
+    function _handleSignUp(){
+        let universityId = _getUniversityId()
+
+        console.log("universityId : ",universityId)
+
+        if (universityId !== -1) {
+            let userData = {
+                username: mail,
+                password: password,
+                university_id: universityId
+            }
+
+            console.log("userData : ", userData)
+
+            SignUpRequest(userData)
+                .then((response) => {
+                    console.log("login response : ",response.data)
+
+                    setUserId(response?.data?.id)
+                    setUserUniversityId(universityId)
+
+                    event.preventDefault();
+                    router.push("/home")
+                })
+                .catch((error) => {
+                    console.log("Login error : ",error)
+                    setAlertMessage(error.message)
+                    setShowSnackbar(true)
+                })
+        } else {
+            setAlertMessage("Geçersiz Mail !")
+            setShowSnackbar(true)
+        }
+
     }
 
     function _handleSignIn(){

@@ -8,6 +8,7 @@ export function LayoutContextProvider({ children }) {
     const [showContent, setShowContent] = useState(false);
     const [contentType, setContentType] = useState(0);
     const [projectData, setProjectData] = useState({});
+    const [selectedUniversity, setSelectedUniversity] = useState();
 
     return (
         <LayoutContext.Provider
@@ -16,6 +17,7 @@ export function LayoutContextProvider({ children }) {
                 showContent, setShowContent,
                 contentType, setContentType,
                 projectData, setProjectData,
+                selectedUniversity, setSelectedUniversity
             }}>
 
             {children}

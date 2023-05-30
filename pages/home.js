@@ -8,22 +8,39 @@ import SearchContent from "../components/content/SearchContent";
 import ProfileContent from "../components/content/ProfileContent";
 import CreateProjectContent from "../components/content/CreateProjectContent";
 import UniversityDetailContent from "../components/content/UniversityDetailContent";
-import {myProjects} from "../values/SampleData";
-import {GetAllProjects} from "../adapter/API/request/Project";
-import axios from "axios";
+import {GetAllProjects, GetUserProjectListRequest} from "../adapter/API/request/Project";
+import {UserContext} from "../contexts/UserContext";
 
 export default function Home() {
 
     let { contentType } = useContext(LayoutContext);
+    let { userId, setUserProjects } = useContext(UserContext);
 
     const [projectList, setProjectList] = useState([]);
 
     useEffect(() => {
+        getUserProjects()
+        getAllProjects()
+    }, []);
+
+    function getUserProjects(){
+        console.log("getUserProjects : ",userId )
+        let requestData = {
+            user_id: userId
+        }
+
+        GetUserProjectListRequest(requestData)
+            .then((response) => {
+                setUserProjects(response?.data)
+            })
+    }
+
+    function getAllProjects(){
         GetAllProjects()
             .then((response) => {
                 setProjectList(response?.data)
             })
-    }, []);
+    }
 
     return (
         <div className={'flex flex-col bg-black h-screen overflow-y-scroll'}>

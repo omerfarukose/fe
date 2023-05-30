@@ -1,40 +1,16 @@
-import {RiHome6Fill} from "react-icons/ri";
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {SidebarButton} from "../ui/SidebarButton";
 import {LayoutContext} from "../../contexts/LayoutContext";
 import {MdAddCircle} from "react-icons/md";
 import {FiLogIn} from "react-icons/fi";
 import Link from "next/link";
+import {GetProjectDataRequest} from "../../adapter/API/request/Project";
+import {UserContext} from "../../contexts/UserContext";
 
 export const Sidebar = ( ) => {
 
     let { setContentType } = useContext(LayoutContext);
 
-    const _renderProjectItem = ( ) => {
-        return(
-            <div
-                onClick={() => setContentType(1)}
-                className={"flex flex-row items-center mb-4 hover:bg-test-third-gray hover:rounded p-1"}>
-
-                <div className={"h-10 w-10 mr-2 bg-test-white rounded flex justify-center items-center text-black"}>
-                    P
-                </div>
-
-                <div>
-
-                    <div className={"text-medium"}>
-                        Sample Project Name
-                    </div>
-
-                    <div className={"text-medium font-medium"}>
-                        Sample University
-                    </div>
-
-                </div>
-
-            </div>
-        )
-    }
 
     return(
         <div className={"w-1/6"}>
@@ -46,7 +22,7 @@ export const Sidebar = ( ) => {
                 <SidebarButton title={"Profile"} type={3}/>
                 {/*<SidebarButton title={"Messages"} type={4}/>*/}
                 <SidebarButton title={"Search"} type={5}/>
-                <SidebarButton title={"Settings"} type={2}/>
+                <SidebarButton title={"Projelerim"} type={2}/>
 
             </div>
 
@@ -65,12 +41,6 @@ export const Sidebar = ( ) => {
                     </div>
 
                 </div>
-
-                {/*project button*/}
-                { _renderProjectItem() }
-                { _renderProjectItem() }
-                { _renderProjectItem() }
-                { _renderProjectItem() }
 
             </div>
 
