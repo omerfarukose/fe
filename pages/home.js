@@ -24,7 +24,6 @@ export default function Home() {
     }, []);
 
     function getUserProjects(){
-        console.log("getUserProjects : ",userId )
         let requestData = {
             user_id: userId
         }

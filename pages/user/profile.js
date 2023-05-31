@@ -8,16 +8,6 @@ import Image from "next/image";
 
 export default function Project(){
 
-    let { isLogin, setIsLogin } = useContext(UserContext);
-
-    const router = useRouter()
-
-    // useEffect(() => {
-    //     if(!isLogin){
-    //         router.push("/login")
-    //     }
-    // }, []);
-
     const Menus = [
         { title: "Profil", icon: <FaRegUser color={"white"}/>},
         { title: "Projelerim", icon: <FaAt color={"white"}/>},

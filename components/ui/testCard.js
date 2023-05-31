@@ -44,14 +44,6 @@ export const TestCard = ( props ) => {
             })
     }
 
-    const _renderRoleItem = (title) => {
-        return(
-            <div className="bg-test-white text-second-color rounded text-medium flex justify-center items-center">
-                {title}
-            </div>
-        )
-    }
-
     return(
         <div
             onClick={() => {
@@ -67,16 +59,18 @@ export const TestCard = ( props ) => {
                 <div>
 
                     {/* project name */}
-                    <div className={"text-lg font-bold"}>
+                    <div className={"text-2xl font-bold"}>
+
                         { projectData?.name }
+
                     </div>
 
-                    {/* owner university */}
+                    {/* created at */}
                     <div className={"flex items-center"}>
 
                         <BiTime size={15}/>
 
-                        <div className={"ml-2 text-medium"}>
+                        <div className={"ml-2 text-sm"}>
                             {
                                 formatDate(projectData?.created_at)
                             }
@@ -113,31 +107,6 @@ export const TestCard = ( props ) => {
                     {/*    <div className={"ml-2"}>*/}
                     {/*        { projectData?.university }*/}
                     {/*    </div>*/}
-
-                    {/*</div>*/}
-
-                </div>
-
-            </div>
-
-            {/* right view */}
-            <div className="w-2/6 py-8 rounded-tr-lg rounded-br-lg text-white flex flex-col items-center justify-between">
-
-                {/* title */}
-                <div className={"font-bold"}>
-                    Takım Arkadaşı Arayışı
-                </div>
-
-                {/* roles */}
-                <div className="flex w-full">
-
-                    {/*<div className="grid grid-cols-2 p-4 gap-2 w-full">*/}
-
-                    {/*    {*/}
-                    {/*        roles?.map((role) => (*/}
-                    {/*            _renderRoleItem(role)*/}
-                    {/*        ))*/}
-                    {/*    }*/}
 
                     {/*</div>*/}
 

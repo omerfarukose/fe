@@ -36,7 +36,7 @@ export default function CreateProjectContent (props) {
 
     const _renderInputItem = ( title, value, setValue ) => {
         return(
-            <div className={"px-8 py-4"}>
+            <div className={"px-8 py-4 mb-8"}>
 
                 <p className={"mb-2 font-medium"}>
                     { title }
@@ -59,22 +59,26 @@ export default function CreateProjectContent (props) {
     return(
         <div className="flex flex-1 flex-col bg-test-gray w-full mx-3 mb-3 rounded">
 
-            <BackButton title={"Create Project"}/>
+            <BackButton title={"Proje Oluştur"}/>
 
-            <div className={"font-bold text-2xl p-8 pt-2"}>
-                Create project.
+            <div
+                className={"mt-20"}>
+
+                { _renderInputItem("Proje İsmi", projectName, setProjectName)}
+
+                { _renderInputItem("Proje Açıklaması", projectDescription, setProjectDescription)}
+
             </div>
 
-            { _renderInputItem("Project name", projectName, setProjectName)}
 
-            { _renderInputItem("Project description", projectDescription, setProjectDescription)}
-
-            <div className={"flex justify-center mt-8"}>
+            <div className={"flex justify-center mt-10"}>
 
                 <div
                     onClick={() => _handleCreateProject()}
                     className={"cursor-pointer bg-green-600 p-2 rounded text-test-gray font-medium"}>
-                    Create
+
+                    Oluştur
+
                 </div>
 
             </div>

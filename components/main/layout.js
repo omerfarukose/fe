@@ -10,7 +10,7 @@ export default function Layout (props) {
 
     let {children, sidebar=true, footer=true, navbar=true, navbarItems=true} = props;
 
-    let { isSidebarOpen, isLogin } = useContext(LayoutContext);
+    let { isSidebarOpen } = useContext(LayoutContext);
 
     return(
         <div className={'min-h-screen min-w-screen flex flex-col flex-auto flex-shrink-0 bg-test-body'}>

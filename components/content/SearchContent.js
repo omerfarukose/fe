@@ -33,27 +33,15 @@ export default function SearchContent (props) {
     return(
         <div className="flex flex-1 flex-col bg-test-gray w-full mx-3 mb-3 rounded">
 
-            <BackButton title={"Search"}/>
+            <BackButton title={"Üniversiteler"}/>
 
-            <div className={"grid grid-cols-6 place-items-center gap-4"}>
+            <div className={"flex justify-evenly mt-24"}>
 
                 { _renderUniCard("pau-logo.png", "PAÜ", 1)}
                 { _renderUniCard("marmara-logo.png", "MÜ", 2)}
                 { _renderUniCard("ege-logo.png", "EGE", 3)}
                 { _renderUniCard("akdeniz-logo.jpeg", "AKDÜ", 4)}
                 { _renderUniCard("yildiz-logo.png", "YTÜ", 5)}
-                {/*{ _renderUniCard("itu-logo.jpeg", "İTÜ")}*/}
-                {/*{ _renderUniCard("hacettepe-logo.png", "HÜ")}*/}
-                {/*{ _renderUniCard("odtu-logo.jpeg", "ODTU")}*/}
-                {/*{ _renderUniCard("bogazici-logo.jpeg", "BOUN")}*/}
-                {/*{ _renderUniCard("bau-logo.jpeg", "BAU")}*/}
-                {/*{ _renderUniCard("bilkent-logo.png", "BILKENT")}*/}
-                {/*{ _renderUniCard("dokuz-logo.jpeg", "DEÜ")}*/}
-                {/*{ _renderUniCard("katu-logo.png", "KATÜ")}*/}
-                {/*{ _renderUniCard("koc-logo.png", "KOÇ")}*/}
-                {/*{ _renderUniCard("msk-logo.png", "MSKÜ")}*/}
-                {/*{ _renderUniCard("ohu-logo.png", "ÖHÜ")}*/}
-                {/*{ _renderUniCard("beykent-logo.png", "BEYKENT")}*/}
 
             </div>
 

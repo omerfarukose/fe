@@ -33,7 +33,7 @@ export default function SettingsContent (props) {
     return(
         <div className="flex flex-1 flex-col w-full mx-3 mb-3 rounded">
 
-            <BackButton title={"Settings"}/>
+            <BackButton title={"Projelerim"}/>
 
             <div className={"flex flex-1 flex-col px-3 overflow-scroll h-screen"}>
 

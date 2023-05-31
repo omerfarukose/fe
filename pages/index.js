@@ -23,8 +23,6 @@ export default function Login() {
         let universityId = -1;
 
         UniversityList.map((item, index) => {
-            console.log("item : ", item )
-            console.log("is valid : ", mail.includes(item?.mailValue))
 
             if (mail.includes(item?.mailValue)) {
                 universityId = item?.id
@@ -38,8 +36,6 @@ export default function Login() {
     function _handleSignUp(){
         let universityId = _getUniversityId()
 
-        console.log("universityId : ",universityId)
-
         if (universityId !== -1) {
             let userData = {
                 username: mail,
@@ -47,11 +43,8 @@ export default function Login() {
                 university_id: universityId
             }
 
-            console.log("userData : ", userData)
-
             SignUpRequest(userData)
                 .then((response) => {
-                    console.log("login response : ",response.data)
 
                     setUserId(response?.data?.id)
                     setUserUniversityId(universityId)
@@ -60,7 +53,6 @@ export default function Login() {
                     router.push("/home")
                 })
                 .catch((error) => {
-                    console.log("Login error : ",error)
                     setAlertMessage(error.message)
                     setShowSnackbar(true)
                 })
@@ -72,8 +64,6 @@ export default function Login() {
     }
 
     function _handleSignIn(){
-        console.log("_handleSignIn")
-
         let userData = {
             username: mail,
             password: password
@@ -81,15 +71,12 @@ export default function Login() {
 
         SignInRequest(userData)
             .then((response) => {
-                console.log("login response : ",response.data)
-
                 setUserId(response?.data?.id)
 
                 event.preventDefault();
                 router.push("/home")
             })
             .catch((error) => {
-                console.log("Login error : ",error)
                 setAlertMessage(error.message)
                 setShowSnackbar(true)
             })

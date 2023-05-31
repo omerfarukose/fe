@@ -1,4 +1,4 @@
-export const BASE_URL = "https://adcc-85-97-126-7.ngrok-free.app";
+export const BASE_URL = "https://d121-85-97-126-7.ngrok-free.app";
 
 // auth
 export const SIGN_UP_URL = "/users";
