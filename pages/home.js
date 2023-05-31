@@ -35,6 +35,7 @@ export default function Home() {
     }
 
     function getAllProjects(){
+        console.log("GET ALL PROJECTS")
         GetAllProjects()
             .then((response) => {
                 setProjectList(response?.data)

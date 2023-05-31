@@ -17,16 +17,9 @@ export default function UniversityDetailContent (props) {
     const [universityInfo, setUniversityInfo] = useState({});
 
     useEffect(() => {
-        console.log("UniversityDetailContent useEffect")
         getUniversityInfo()
         getUniversityProjectList()
     }, []);
-
-    useEffect(() => {
-        console.log("uni info : ", universityInfo)
-    }, [universityInfo]);
-
-
 
     function getUniversityProjectList(){
         let requestData = {

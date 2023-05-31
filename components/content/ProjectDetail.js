@@ -1,6 +1,6 @@
 import {BackButton} from "../ui/BackButton";
 import React, {useContext, useEffect, useState} from "react";
-import {Avatar, Modal} from "@mui/material";
+import {Avatar, Modal, Snackbar} from "@mui/material";
 import {TbListCheck} from "react-icons/tb";
 import {BiEnvelope} from "react-icons/bi";
 import {HiOutlineClock} from "react-icons/hi";
@@ -8,7 +8,7 @@ import {IoIosCloseCircle, IoIosAddCircle} from "react-icons/io";
 import {LayoutContext} from "../../contexts/LayoutContext";
 import {ApplyRoleModal} from "../modal/ApplyRoleModal";
 import {UserContext} from "../../contexts/UserContext";
-import {AiFillCloseSquare, AiFillCheckSquare, AiFillCloud} from "react-icons/ai";
+import {AiFillCloseSquare, AiFillCheckSquare, AiOutlineUserAdd} from "react-icons/ai";
 import {
     ApproveMemberRequest, CompleteTaskRequest,
     GetMemberListRequest, GetProjectTaskListRequest,
@@ -34,6 +34,8 @@ export default function ProjectDetail (props) {
     const [approvedMember, setApprovedMembers] = useState([]);
     const [taskList, setTaskList] = useState([]);
     const [projectUniversity, setProjectUniversity] = useState("");
+    const [showSnackbar, setShowSnackbar] = useState(false);
+
 
     useEffect(() => {
         console.log("Project data : ", projectData)
@@ -50,17 +52,55 @@ export default function ProjectDetail (props) {
         })
     }
 
-    function getUserData(userId, isApproved, memberId){
+    function getUserData(itemUserId, isApproved, memberId){
         let requestData = {
-            id: userId
+            id: itemUserId
         }
 
         GetUserDataRequest(requestData)
             .then((response) => {
+
+                let userFullName = response?.data?.username
+
+                let isUserExist = false
+
                 if (isApproved) {
-                    setApprovedMembers(oldArray => [...oldArray, {id: userId, username: response?.data?.username}]);
+
+                    approvedMember.map((item) => {
+                        if (item?.id === itemUserId) {
+                            isUserExist = true
+                        }
+                    })
+
+                    if (!isUserExist) {
+                        setApprovedMembers(oldArray => [...oldArray, {id: itemUserId, username: userFullName.substring(0, userFullName.indexOf("@"))}]);
+                    } else {
+                        console.log("user already exist ! 1")
+                    }
+
                 } else {
-                    setMemberList(oldArray => [...oldArray, {id: userId, username: response?.data?.username, memberId:memberId}]);
+
+                    console.log("memberId : ", memberId)
+                    console.log("userId : ", userId)
+
+                    if (itemUserId === projectData?.owner ) {
+
+                        approvedMember.map((item) => {
+                            if (item?.id === itemUserId) {
+                                isUserExist = true
+                            }
+                        })
+
+                        if (!isUserExist) {
+                            setApprovedMembers(oldArray => [...oldArray, {id: itemUserId, username: userFullName.substring(0, userFullName.indexOf("@"))}]);
+                        } else {
+                            console.log("user already exist ! 2")
+                        }
+
+                    } else {
+                        setMemberList(oldArray => [...oldArray, {id: itemUserId, username: userFullName.substring(0, userFullName.indexOf("@")), memberId:memberId}]);
+                    }
+
                 }
             })
     }
@@ -112,6 +152,10 @@ export default function ProjectDetail (props) {
         ApproveMemberRequest(requestData)
             .then((response) => {
                 console.log("User added to project !")
+
+                getProjectMembers()
+                setIsInvitesModalVisible(false)
+                setShowSnackbar(true)
             })
     }
 
@@ -151,23 +195,31 @@ export default function ProjectDetail (props) {
     const _renderMemberItem = ( user ) => {
         console.log("_renderMemberItem user : ", user)
         return(
-            <div
-                onClick={() => setIsInvitesModalVisible(true)}
-                className={"flex items-center w-10/12 rounded h-fit bg-test-second-gray p-2 mb-2 hover:bg-test-third-gray"}>
+            <div className={"flex w-2/5 items-center justify-between rounded h-fit p-2 mb-2 bg-test-third-gray"}>
 
-                <p className={"text-medium font-bold text-test-white p-2"}>
-                    {user?.username}
-                </p>
+                <div className={"flex items-center"}>
+                    <div className={"mr-2"}>
+                        <Avatar alt="ömer" sx={{ width: 30, height: 30 }} src="/static/images/user-logo.png"/>
+                    </div>
 
-                <div
-                    onClick={() => {
-                        handleMemberApprove(user.memberId)
-                    }}>
-                    <AiFillCheckSquare color={"#b3b3b3"} size={20}/>
+                    <p className={"text-medium font-bold text-test-white p-2"}>
+                        {user?.username}
+                    </p>
+                </div>
+
+                <div className={"flex"}>
+                    <div
+                        onClick={() => {
+                            handleMemberApprove(user.memberId)
+                        }}>
+                        <AiFillCheckSquare color={"#b3b3b3"} size={30}/>
+                    </div>
+
+
+                    <AiFillCloseSquare color={"#b3b3b3"} size={30}/>
                 </div>
 
 
-                <AiFillCloseSquare color={"#b3b3b3"} size={20}/>
 
             </div>
         )
@@ -177,11 +229,10 @@ export default function ProjectDetail (props) {
         console.log("_renderApprovedItem : ", user)
         return(
             <div
-                onClick={() => setShowParticipantTasks(true)}
                 className={"flex w-10/12 items-center rounded h-fit bg-test-second-gray p-2 mb-2 hover:bg-test-third-gray"}>
 
                 <div className={"mr-2"}>
-                    <Avatar alt="ömer" sx={{ width: 50, height: 50 }} src="/static/images/user2.jpg"/>
+                    <Avatar alt="ömer" sx={{ width: 30, height: 30 }} src="/static/images/user-logo.png"/>
                 </div>
 
                 <div>
@@ -192,10 +243,20 @@ export default function ProjectDetail (props) {
         )
     }
 
+    function formatDate(date){
+        const originalTime =  date;
+        const formattedTime = new Date(originalTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const formattedDate = new Date(originalTime).toLocaleDateString([], { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+        let convertedTime = `${formattedTime} ${formattedDate}`;
+
+        return convertedTime
+    }
+
     return(
         <div className="flex flex-1 flex-col bg-test-gray w-full mx-3 mb-3 rounded">
 
-            <BackButton title={"Project Detail"}/>
+            <BackButton title={"Proje Detayı"}/>
 
             {/*header*/}
             <div className={"p-6 flex"}>
@@ -223,7 +284,7 @@ export default function ProjectDetail (props) {
                         <HiOutlineClock color={"#b3b3b3"} size={15}/>
 
                         <p className={"ml-1"}>
-                            { projectData?.created_at }
+                            { formatDate(projectData?.created_at) }
                         </p>
 
                     </div>
@@ -246,7 +307,7 @@ export default function ProjectDetail (props) {
                                 <BiEnvelope color={"#b3b3b3"} size={20}/>
 
                                 <p className={"text-medium font-bold text-test-white p-2"}>
-                                    Invites
+                                    İstekler
                                 </p>
 
                             </div>
@@ -256,10 +317,10 @@ export default function ProjectDetail (props) {
                                 onClick={() => handleJoinRequest()}
                                 className={"flex items-center w-10/12 rounded h-fit bg-test-second-gray p-2 mb-2 hover:bg-test-third-gray"}>
 
-                                <AiFillCloud color={"#b3b3b3"} size={20}/>
+                                <AiOutlineUserAdd color={"#b3b3b3"} size={20}/>
 
                                 <p className={"text-medium font-bold text-test-white p-2"}>
-                                    Join
+                                    Katılma İsteği
                                 </p>
 
                             </div>
@@ -267,37 +328,20 @@ export default function ProjectDetail (props) {
 
 
 
-                    <div className={"flex items-center w-10/12 rounded h-fit bg-test-second-gray p-2 mb-2 hover:bg-test-third-gray"}>
+                    <div
+                        onClick={() => setShowParticipantTasks(true)}
+                        className={"flex items-center w-10/12 rounded h-fit bg-test-second-gray p-2 mb-2 hover:bg-test-third-gray"}>
 
                         <TbListCheck color={"#b3b3b3"} size={20}/>
 
                         <p className={"text-medium font-bold text-test-white p-2"}>
-                            Tasks
+                            Görev Listesi
                         </p>
 
                     </div>
 
                     <p className={"text-medium font-bold text-test-white p-2"}>
-                        Roles
-                    </p>
-
-                    {/*{*/}
-                    {/*    projectData.roles.map((role) => (*/}
-                    {/*        <div*/}
-                    {/*            key={"1"}*/}
-                    {/*            onClick={() => {*/}
-                    {/*                setIsApplyModalOpen(true)*/}
-                    {/*            }}*/}
-                    {/*            className={"flex w-10/12 items-center rounded h-fit bg-test-second-gray p-2 mb-2 hover:bg-test-third-gray"}>*/}
-
-                    {/*            <p className={"text-medium font-bold text-test-white"}> {role} </p>*/}
-
-                    {/*        </div>*/}
-                    {/*    ))*/}
-                    {/*}*/}
-
-                    <p className={"text-medium font-bold text-test-white p-2"}>
-                        Participants
+                        Takım
                     </p>
 
                     {
@@ -396,10 +440,10 @@ export default function ProjectDetail (props) {
 
                             <div>
                                 <p className={"text-xl font-bold text-test-white mb-4"}>
-                                    Project Description
+                                    Proje Açıklaması
                                 </p>
 
-                                <p className={"text-medium font-bold text-test-white mb-4"}>
+                                <p className={"text-medium font-bold text-white mb-4"}>
                                     { projectData.description }
                                 </p>
                             </div>
@@ -418,10 +462,10 @@ export default function ProjectDetail (props) {
                 aria-describedby="modal-modal-description">
 
                 {/*modal content*/}
-                <div className={"flex flex-col justify-evenly items-center w-2/3 h-1/3 rounded bg-test-second-gray p-3"}>
+                <div className={"flex flex-col justify-evenly items-center w-2/3 h-fit rounded bg-test-second-gray p-3"}>
 
                     <div className={"text-3xl font-bold text-test-white"}>
-                        Join Request
+                        Katılma İstekleri
                     </div>
 
                     {
@@ -441,7 +485,7 @@ export default function ProjectDetail (props) {
             <Modal
                 open={isTaskModalOpen}
                 onClose={() => setIsTaskModalOpen(false)}
-                style={{display:'flex',alignItems:'center',justifyContent:'center'}}
+                style={{display:'flex',alignItems:'center',justifyContent:'center', outline: "none"}}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description">
 
@@ -479,6 +523,12 @@ export default function ProjectDetail (props) {
                 </div>
 
             </Modal>
+
+            <Snackbar
+                open={showSnackbar}
+                autoHideDuration={6000}
+                onClose={() => setShowSnackbar(false)}
+                message={"Kullanıcı kabul edildi !"}/>
 
             <ApplyRoleModal isOpen={isApplyModalOpen} onClose={() => setIsApplyModalOpen(false)} />
 

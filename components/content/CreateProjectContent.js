@@ -2,13 +2,17 @@ import React, {useContext, useState} from "react";
 import {BackButton} from "../ui/BackButton";
 import {CreateProjectRequest, SetProjectMemberRequest} from "../../adapter/API/request/Project";
 import {UserContext} from "../../contexts/UserContext";
+import {Snackbar} from "@mui/material";
+import {LayoutContext} from "../../contexts/LayoutContext";
 
 export default function CreateProjectContent (props) {
 
     let { userId, userUniversityId } = useContext(UserContext);
+    let { setContentType } = useContext(LayoutContext);
 
     const [projectName, setProjectName] = useState("");
     const [projectDescription, setProjectDescription] = useState("");
+    const [showSnackbar, setShowSnackbar] = useState(false);
 
     function _handleCreateProject(){
         let requestData = {
@@ -18,20 +22,35 @@ export default function CreateProjectContent (props) {
             university_id: userUniversityId,
         }
 
-        CreateProjectRequest(requestData)
-            .then((response) => {
-                console.log("project created !")
+        if (userId && projectName && projectDescription && userUniversityId) {
 
-                let requestData = {
-                    user_id: userId,
-                    project_id: response?.data?.id
-                }
+            CreateProjectRequest(requestData)
+                .then((response) => {
+                    console.log("project created !")
 
-                SetProjectMemberRequest(requestData)
-                    .then(() => {
-                        console.log("User added to member list !")
-                    })
-            })
+                    let requestData = {
+                        user_id: userId,
+                        project_id: response?.data?.id,
+                    }
+
+                    SetProjectMemberRequest(requestData)
+                        .then(() => {
+                            console.log("User added to member list !")
+                            setShowSnackbar(true)
+
+                            let delayInMilliseconds = 2000; //1 second
+
+                            setTimeout(function() {
+                                //your code to be executed after 1 second
+                                setContentType(0)
+                            }, delayInMilliseconds);
+                        })
+                })
+        } else {
+            console.log("invalid requestData : ", requestData)
+        }
+
+
     }
 
     const _renderInputItem = ( title, value, setValue ) => {
@@ -82,6 +101,12 @@ export default function CreateProjectContent (props) {
                 </div>
 
             </div>
+
+            <Snackbar
+                open={showSnackbar}
+                autoHideDuration={6000}
+                onClose={() => setShowSnackbar(false)}
+                message={"Proje Oluşturuldu !"}/>
 
         </div>
     )

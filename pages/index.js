@@ -64,22 +64,32 @@ export default function Login() {
     }
 
     function _handleSignIn(){
-        let userData = {
-            username: mail,
-            password: password
+        let universityId = _getUniversityId()
+
+        if (universityId !== -1) {
+            let userData = {
+                username: mail,
+                password: password
+            }
+
+            SignInRequest(userData)
+                .then((response) => {
+
+                    setUserId(response?.data?.id)
+                    setUserUniversityId(universityId)
+
+                    event.preventDefault();
+                    router.push("/home")
+                })
+                .catch((error) => {
+                    setAlertMessage(error.message)
+                    setShowSnackbar(true)
+                })
+        } else {
+            setAlertMessage("Geçersiz Mail !")
+            setShowSnackbar(true)
         }
 
-        SignInRequest(userData)
-            .then((response) => {
-                setUserId(response?.data?.id)
-
-                event.preventDefault();
-                router.push("/home")
-            })
-            .catch((error) => {
-                setAlertMessage(error.message)
-                setShowSnackbar(true)
-            })
     }
 
     const _renderInputItem = ( value, setValue, placeholder, hideText = false ) => {
@@ -92,7 +102,7 @@ export default function Login() {
                 autoComplete={"off"}
                 placeholder={placeholder}
                 onChange={ e => setValue(e.target.value)}
-                className="bg-test-white rounded w-4/5 p-2 text-test-gray placeholder-test-gray"
+                className="bg-test-white rounded w-4/5 p-2 pl-4 text-test-gray placeholder-test-gray"
                 required/>
         )
     }
@@ -113,8 +123,8 @@ export default function Login() {
                     </div>
 
                     <>
-                        { _renderInputItem(mail, setMail, "mail")}
-                        { _renderInputItem(password, setPassword, "password", true)}
+                        { _renderInputItem(mail, setMail, "e-mail")}
+                        { _renderInputItem(password, setPassword, "şifre", true)}
                     </>
 
                     <div className={"flex flex-row w-4/5 justify-evenly"}>
@@ -134,9 +144,9 @@ export default function Login() {
 
                                 {
                                     isSignIn ?
-                                        "login"
+                                        "Giriş"
                                         :
-                                        "create"
+                                        "Kayıt"
                                 }
 
                             </div>
@@ -154,9 +164,9 @@ export default function Login() {
 
                     {
                         isSignIn ?
-                            "create account"
+                            "Hesap Oluştur"
                             :
-                            "login"
+                            "Hesabın var mı ? Giriş Yap"
                     }
 
 

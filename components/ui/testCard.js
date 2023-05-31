@@ -50,7 +50,7 @@ export const TestCard = ( props ) => {
                 setProjectData(projectData)
                 setContentType(1)
             }}
-            className="flex flex-row bg-test-gray w-full h-fit p-2 rounded-md mb-2 cursor-pointer">
+            className="flex flex-row bg-test-gray w-full h-72 p-2 rounded-md mb-2 cursor-pointer">
 
             {/* left view */}
             <div className="p-8 w-4/6 flex flex-col rounded">
@@ -80,16 +80,18 @@ export const TestCard = ( props ) => {
 
                 </div>
 
-                {/* project detail */}
+                {/* project description */}
                 <div className={"text-sm flex flex-1 items-center my-5"}>
+
                     { projectData?.description }
+
                 </div>
 
                 {/* owner info */}
                 <div className={"text-medium"}>
 
                     {/* owner name */}
-                    <div className={"flex"}>
+                    <div className={"flex items-center"}>
 
                         <BiUser size={15}/>
 
@@ -99,16 +101,6 @@ export const TestCard = ( props ) => {
 
                     </div>
 
-                    {/*/!* owner university *!/*/}
-                    {/*<div className={"flex"}>*/}
-
-                    {/*    <GiGreekTemple size={15}/>*/}
-
-                    {/*    <div className={"ml-2"}>*/}
-                    {/*        { projectData?.university }*/}
-                    {/*    </div>*/}
-
-                    {/*</div>*/}
 
                 </div>
 
