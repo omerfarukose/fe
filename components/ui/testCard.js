@@ -50,7 +50,7 @@ export const TestCard = ( props ) => {
                 setProjectData(projectData)
                 setContentType(1)
             }}
-            className="flex flex-row bg-test-gray w-full h-72 p-2 rounded-md mb-2 cursor-pointer">
+            className="flex flex-row bg-test-gray w-full p-2 rounded-md mb-2 cursor-pointer">
 
             {/* left view */}
             <div className="p-8 w-4/6 flex flex-col rounded">

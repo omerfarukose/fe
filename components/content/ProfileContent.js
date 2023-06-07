@@ -1,14 +1,30 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {BackButton} from "../ui/BackButton";
 import {Avatar} from "@mui/material";
 import {BiImageAdd} from "react-icons/bi";
 import {FiEdit3} from "react-icons/fi";
+import {UserContext} from "../../contexts/UserContext";
+import {UniversityList} from "../../values/Constants";
 
 export default function ProfileContent (props) {
 
-    const [name, setName] = useState("okose181");
-    const [university, setUniversity] = useState("Pamukkale University");
+    let { username, userUniversityId } = useContext(UserContext);
+
+    const [name, setName] = useState("");
+    const [university, setUniversity] = useState("");
     const [department, setDepartment] = useState("Computer Science");
+
+    useEffect(() => {
+        getProjectUniversity()
+    }, []);
+
+    function getProjectUniversity(){
+        UniversityList.map((item) => {
+            if(userUniversityId === item?.id) {
+                setUniversity(item?.name)
+            }
+        })
+    }
 
     const _renderInputItem = ( value, setValue ) => {
         return(
@@ -46,10 +62,10 @@ export default function ProfileContent (props) {
                 <div className={"flex flex-col items-center justify-center"}>
 
                     <div className={"mb-4 border border-2 border-white rounded-full"}>
-                        <Avatar sx={{ width: 200, height: 200 }} alt="Remy Sharp" src="/static/images/user2.jpg" />
+                        <Avatar sx={{ width: 200, height: 200 }} alt="Remy Sharp" src="/static/images/user-logo.png" />
                     </div>
 
-                    <BiImageAdd color={"#ffffff"} size={30}/>
+                    {/*<BiImageAdd color={"#ffffff"} size={30}/>*/}
 
                 </div>
 
@@ -57,56 +73,56 @@ export default function ProfileContent (props) {
                 <div className={"p-8 w-3/5 flex flex-col items-center"}>
 
                     <div className={"bg-test-second-gray rounded rounded-tl-none rounded-bl-none w-3/5 p-2 px-4 mb-3 text-test-white placeholder-test-gray"}>
-                        okose181
+                        {username}
                     </div>
 
                     <div className={"bg-test-second-gray rounded w-3/5 p-2 px-4 mb-3 text-test-white placeholder-test-gray"}>
-                        Pamukkale University
+                        { university }
                     </div>
 
-                    { _renderInputItem(department, setDepartment)}
+                    {/*{ _renderInputItem(department, setDepartment)}*/}
                 </div>
 
                 {/*info cards*/}
-                <div className={"flex w-full justify-evenly items-center"}>
+                {/*<div className={"flex w-full justify-evenly items-center"}>*/}
 
-                    {/*projects*/}
-                    <div className={"w-28 bg-test-second-gray h-1/5 h-32 flex flex-col items-center justify-evenly rounded cursor-pointer"}>
+                {/*    /!*projects*!/*/}
+                {/*    <div className={"w-28 bg-test-second-gray h-1/5 h-32 flex flex-col items-center justify-evenly rounded cursor-pointer"}>*/}
 
-                        <p className={"text-3xl font-bold"}>
-                            3
-                        </p>
+                {/*        <p className={"text-3xl font-bold"}>*/}
+                {/*            3*/}
+                {/*        </p>*/}
 
-                        <p className={"text-medium font-bold"}>
-                            Projects
-                        </p>
-                    </div>
+                {/*        <p className={"text-medium font-bold"}>*/}
+                {/*            Projects*/}
+                {/*        </p>*/}
+                {/*    </div>*/}
 
-                    {/*tasks*/}
-                    <div className={"w-28 bg-test-second-gray h-1/5 h-32 flex flex-col items-center justify-evenly rounded cursor-pointer"}>
+                {/*    /!*tasks*!/*/}
+                {/*    <div className={"w-28 bg-test-second-gray h-1/5 h-32 flex flex-col items-center justify-evenly rounded cursor-pointer"}>*/}
 
-                        <p className={"text-3xl font-bold"}>
-                            6
-                        </p>
+                {/*        <p className={"text-3xl font-bold"}>*/}
+                {/*            6*/}
+                {/*        </p>*/}
 
-                        <p className={"text-medium font-bold"}>
-                            Tasks
-                        </p>
-                    </div>
+                {/*        <p className={"text-medium font-bold"}>*/}
+                {/*            Tasks*/}
+                {/*        </p>*/}
+                {/*    </div>*/}
 
-                    {/*tasks*/}
-                    <div className={"w-28 bg-test-second-gray h-1/5 h-32 flex flex-col items-center justify-evenly rounded cursor-pointer"}>
+                {/*    /!*tasks*!/*/}
+                {/*    <div className={"w-28 bg-test-second-gray h-1/5 h-32 flex flex-col items-center justify-evenly rounded cursor-pointer"}>*/}
 
-                        <p className={"text-3xl font-bold"}>
-                            4
-                        </p>
+                {/*        <p className={"text-3xl font-bold"}>*/}
+                {/*            4*/}
+                {/*        </p>*/}
 
-                        <p className={"text-medium font-bold"}>
-                            Invites
-                        </p>
-                    </div>
+                {/*        <p className={"text-medium font-bold"}>*/}
+                {/*            Invites*/}
+                {/*        </p>*/}
+                {/*    </div>*/}
 
-                </div>
+                {/*</div>*/}
 
 
             </div>

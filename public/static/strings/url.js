@@ -1,4 +1,4 @@
-export const BASE_URL = "https://d121-85-97-126-7.ngrok-free.app";
+export const BASE_URL = "https://ff30-85-97-126-7.ngrok-free.app";
 
 // auth
 export const SIGN_UP_URL = "/users";
@@ -17,6 +17,7 @@ export const GET_PROJECT_MEMBER = "/get_memberships";
 export const GET_USER_DATA = "/get_user";
 export const GET_UNIVERSITY_PROJECT_LIST = "/university_projects";
 export const GET_USER_PROJECT_LIST = "/user_projects";
+export const CREATE_TODO = "/user_projects";
 
 export const APPROVE_MEMBER = "/approve"
 

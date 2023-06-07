@@ -1,7 +1,7 @@
 import {myGetRequest} from "./main/myGetRequest";
 import {
     APPROVE_MEMBER, BASE_URL,
-    CREATE_PROJECT,
+    CREATE_PROJECT, CREATE_TODO,
     GET_PROJECT_MEMBER, GET_PROJECT_TASK_LIST, GET_UNIVERSITY_PROJECT_LIST,
     GET_USER_DATA, GET_USER_PROJECT_LIST,
     SET_PROJECT_MEMBER
@@ -94,7 +94,7 @@ export const GetProjectTaskListRequest = ( requestData ) => {
 export const CompleteTaskRequest = ( data ) => {
     let requestData = {
         description: data?.description,
-        is_done: data?.isDone
+        is_done: data?.is_done,
     }
 
     return new Promise((resolve, reject) => {
@@ -119,6 +119,16 @@ export const GetUniversityProjectListRequest = ( requestData ) => {
 export const GetUserProjectListRequest = ( requestData ) => {
     return new Promise((resolve, reject) => {
         myPostRequest("Get User Project List Request", GET_USER_PROJECT_LIST, requestData)
+            .then(response => {
+                resolve(response)
+            })
+            .catch((error => reject(error)))
+    })
+}
+
+export const CreateTodoRequest = ( requestData ) => {
+    return new Promise((resolve, reject) => {
+        myPostRequest("Create Todo Request", "/"+requestData?.id+"/add_todo", requestData)
             .then(response => {
                 resolve(response)
             })

@@ -15,6 +15,7 @@ export default function CreateProjectContent (props) {
     const [showSnackbar, setShowSnackbar] = useState(false);
 
     function _handleCreateProject(){
+        console.log("_handleCreateProject")
         let requestData = {
             owner: userId,
             name: projectName,

@@ -4,12 +4,14 @@ import {useRouter} from "next/router";
 import {UserContext} from "../contexts/UserContext";
 import {SignInRequest, SignUpRequest} from "../adapter/API/request/Auth";
 import {UniversityList} from "../values/Constants";
+import {LayoutContext} from "../contexts/LayoutContext";
 
 export default function Login() {
 
     const router = useRouter()
 
-    let { setUserId, setUserUniversityId } = useContext(UserContext);
+    let { setUserId, setUserUniversityId, setUsername } = useContext(UserContext);
+    let { setContentType } = useContext(LayoutContext);
 
     const [isSignIn, setIsSignIn] = useState(true);
 
@@ -49,6 +51,8 @@ export default function Login() {
                     setUserId(response?.data?.id)
                     setUserUniversityId(universityId)
 
+                    setContentType(0)
+
                     event.preventDefault();
                     router.push("/home")
                 })
@@ -77,6 +81,9 @@ export default function Login() {
 
                     setUserId(response?.data?.id)
                     setUserUniversityId(universityId)
+                    setUsername(mail.substring(0, mail.indexOf("@")))
+
+                    setContentType(0)
 
                     event.preventDefault();
                     router.push("/home")

@@ -10,6 +10,7 @@ export function UserContextProvider({ children }) {
     const [userId, setUserId] = useState();
     const [userUniversityId, setUserUniversityId] = useState();
     const [userProjects, setUserProjects] = useState([]);
+    const [username, setUsername] = useState("");
 
     const setUserInfoData = ( value ) => {
         if(value){
@@ -31,7 +32,8 @@ export function UserContextProvider({ children }) {
                 userInfo, setUserInfo,
                 userId, setUserId,
                 userUniversityId, setUserUniversityId,
-                userProjects, setUserProjects
+                userProjects, setUserProjects,
+                username, setUsername
             }}>
 
             {children}

@@ -10,7 +10,7 @@ import {ApplyRoleModal} from "../modal/ApplyRoleModal";
 import {UserContext} from "../../contexts/UserContext";
 import {AiFillCloseSquare, AiFillCheckSquare, AiOutlineUserAdd} from "react-icons/ai";
 import {
-    ApproveMemberRequest, CompleteTaskRequest,
+    ApproveMemberRequest, CompleteTaskRequest, CreateTodoRequest,
     GetMemberListRequest, GetProjectTaskListRequest,
     GetUserDataRequest,
     SetProjectMemberRequest
@@ -35,6 +35,8 @@ export default function ProjectDetail (props) {
     const [taskList, setTaskList] = useState([]);
     const [projectUniversity, setProjectUniversity] = useState("");
     const [showSnackbar, setShowSnackbar] = useState(false);
+    const [snackText, setSnackText] = useState("");
+    const [memberIdList, setMemberIdList] = useState([]);
 
 
     useEffect(() => {
@@ -43,6 +45,10 @@ export default function ProjectDetail (props) {
         getProjectTaskList()
         getProjectUniversity()
     }, []);
+
+    useEffect(() => {
+        console.log("------ new task list: ",taskList)
+    }, [taskList]);
 
     function getProjectUniversity(){
         UniversityList.map((item) => {
@@ -115,6 +121,7 @@ export default function ProjectDetail (props) {
 
                 res?.data?.map((item) => {
                     console.log("my - item : ",item)
+                    setMemberIdList(oldArray => [...oldArray, item?.id]);
                     getUserData(item?.user_id, item?.is_approved, item?.id)
                 })
 
@@ -141,6 +148,9 @@ export default function ProjectDetail (props) {
         SetProjectMemberRequest(requestData)
             .then((response) => {
                 console.log("User added to project !")
+
+                setSnackText("Katılma isteği gönderildi")
+                setShowSnackbar(true)
             })
     }
 
@@ -155,21 +165,59 @@ export default function ProjectDetail (props) {
 
                 getProjectMembers()
                 setIsInvitesModalVisible(false)
+                setSnackText("Kullanıcı takıma eklendi !")
                 setShowSnackbar(true)
             })
     }
 
     function handleCompleteTask(item){
+        console.log("handleCompleteTask item : ", item)
         let requestData = {
             id: projectData?.id,
             todoId: item?.id,
-            isDone: true,
+            is_done: true,
             description: item?.description
         }
 
         CompleteTaskRequest(requestData)
             .then(() => {
+                let existList = taskList
 
+                taskList.map((val, index) => {
+                    if (val?.id === item?.id) {
+                        existList[index].is_done = true
+                    }
+                })
+
+                setTaskList([])
+
+                setTimeout(function() {
+                    setTaskList(existList)
+                }, 500);
+
+            })
+    }
+
+    function handleCreateTodo(){
+        let requestData = {
+            id: projectData?.id,
+            description: taskValue,
+            is_done: false,
+        }
+
+        // TODO add create task request
+        CreateTodoRequest(requestData)
+            .then((response) => {
+                let taskItem = {
+                    project_id: projectData?.id,
+                    id: response?.data?.id,
+                    is_done: false,
+                    description: taskValue
+                }
+
+                setTaskList(oldArray => [...oldArray, taskItem]);
+
+                setIsTaskModalOpen(false)
             })
     }
 
@@ -182,7 +230,7 @@ export default function ProjectDetail (props) {
                         handleCompleteTask(item)
                     }
                 }}
-                className={"bg-test-third-gray mb-2"}>
+                className={"bg-test-third-gray mb-2 cursor-pointer"}>
 
                 <p className={"text-sm p-1"}>
                     { item?.description }
@@ -315,7 +363,7 @@ export default function ProjectDetail (props) {
                         :
                             <div
                                 onClick={() => handleJoinRequest()}
-                                className={"flex items-center w-10/12 rounded h-fit bg-test-second-gray p-2 mb-2 hover:bg-test-third-gray"}>
+                                className={"flex items-center w-10/12 rounded h-fit bg-test-second-gray p-2 mb-2 hover:bg-test-third-gray cursor-pointer"}>
 
                                 <AiOutlineUserAdd color={"#b3b3b3"} size={20}/>
 
@@ -326,19 +374,21 @@ export default function ProjectDetail (props) {
                             </div>
                     }
 
+                    {
+                        memberIdList.indexOf(userId) === -1 &&
+                        <div
+                            onClick={() => setShowParticipantTasks(true)}
+                            className={"flex items-center w-10/12 rounded h-fit bg-test-second-gray p-2 mb-2 hover:bg-test-third-gray"}>
 
+                            <TbListCheck color={"#b3b3b3"} size={20}/>
 
-                    <div
-                        onClick={() => setShowParticipantTasks(true)}
-                        className={"flex items-center w-10/12 rounded h-fit bg-test-second-gray p-2 mb-2 hover:bg-test-third-gray"}>
+                            <p className={"text-medium font-bold text-test-white p-2"}>
+                                Görev Listesi
+                            </p>
 
-                        <TbListCheck color={"#b3b3b3"} size={20}/>
+                        </div>
+                    }
 
-                        <p className={"text-medium font-bold text-test-white p-2"}>
-                            Görev Listesi
-                        </p>
-
-                    </div>
 
                     <p className={"text-medium font-bold text-test-white p-2"}>
                         Takım
@@ -414,8 +464,6 @@ export default function ProjectDetail (props) {
                                             <p className={"font-bold mr-2"}>
                                                 Completed
                                             </p>
-
-                                            {/*<FaRegCheckCircle color={"#b3b3b3"} size={18}/>*/}
 
                                         </div>
 
@@ -493,7 +541,7 @@ export default function ProjectDetail (props) {
                 <div className={"flex flex-col justify-evenly items-center w-2/3 h-1/3 rounded bg-test-second-gray p-3"}>
 
                     <div className={"text-3xl font-bold text-test-white"}>
-                        Create task for Omer
+                        Yeni bir görev oluştur !
                     </div>
 
                     <div className={"flex w-full justify-evenly"}>
@@ -512,12 +560,14 @@ export default function ProjectDetail (props) {
 
                     <div
                         onClick={() => {
+                            handleCreateTodo()
                             setTaskValue("")
-                            setIsModalOpen(false)
-                            setTodoList(prevList => ([...prevList, taskValue]))
+                            // setTodoList(prevList => ([...prevList, taskValue]))
                         }}
                         className={"bg-forestGreenCrayola rounded p-2 text-test-gray"}>
-                        Create
+
+                        Oluştur
+
                     </div>
 
                 </div>
@@ -528,7 +578,7 @@ export default function ProjectDetail (props) {
                 open={showSnackbar}
                 autoHideDuration={6000}
                 onClose={() => setShowSnackbar(false)}
-                message={"Kullanıcı kabul edildi !"}/>
+                message={snackText}/>
 
             <ApplyRoleModal isOpen={isApplyModalOpen} onClose={() => setIsApplyModalOpen(false)} />
 

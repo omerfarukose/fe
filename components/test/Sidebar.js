@@ -16,7 +16,7 @@ export const Sidebar = ( ) => {
             <div className={"bg-test-gray h-fit p-3 rounded-md justify-center mb-3"}>
 
                 <SidebarButton title={"Anasayfa"} type={0}/>
-                {/*<SidebarButton title={"Profile"} type={3}/>*/}
+                <SidebarButton title={"Profile"} type={3}/>
                 <SidebarButton title={"Üniversiteler"} type={5}/>
                 <SidebarButton title={"Projelerim"} type={2}/>
 
